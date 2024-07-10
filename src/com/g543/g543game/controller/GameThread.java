@@ -40,10 +40,11 @@ public class GameThread extends Thread {
     private void gameLoad() {
         // 加载图片
         GameLoader.loadImage();
-        // 加载玩家
+        // 绘制玩家
         GameLoader.loadPlayer();
-        // 加载敌人
-        GameLoader.loadEnemy();
+        // 绘制地图
+        GameLoader.loadBackground();
+        // 加载其他元素
 
     }
 

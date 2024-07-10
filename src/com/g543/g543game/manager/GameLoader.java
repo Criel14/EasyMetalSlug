@@ -66,16 +66,13 @@ public class GameLoader {
         elementManager.addElement(GameElement.PLAYER, player);
     }
 
-    // 加载敌人
-    public static void loadEnemy() {
-        loadObject();
-        // 先尝试生成一个敌人
-        String enemyData = "400,220,enemyRPG";
-        ElementObj obj = getObject("enemy");
-        ElementObj enemy = obj.createElement(enemyData);
-        elementManager.addElement(GameElement.ENEMY, enemy);
+    //加载地图
+    public static void loadBackground() {
+        String BackgroundData = "0,0,background";
+        ElementObj obj = getObject("backgroundMap");
+        ElementObj background = obj.createElement(BackgroundData);
+        elementManager.addElement(GameElement.BACKGROUND_MAP, background);
     }
-
 
     // 加载图片方法
     public static void loadImage() {
