@@ -69,7 +69,7 @@ public class GameLoader {
     // 加载敌人
     public static void loadEnemy() {
         loadObject();
-        String enemyData = "400,220,enemyRPG";
+        String enemyData = "400,220,enemyGun";
         ElementObj obj = getObject("enemy");
         ElementObj enemy = obj.createElement(enemyData);
         elementManager.addElement(GameElement.ENEMY, enemy);

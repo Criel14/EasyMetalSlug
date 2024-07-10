@@ -57,7 +57,9 @@ public class Enemy extends ElementObj {
             e.printStackTrace();
         }
 
-        ImageIcon icon = new ImageIcon(imageList.get((int) (gameTime / 5 % imageList.size())).toString());
+        ImageIcon icon = new ImageIcon(imageList.get((int) (gameTime / 20 % imageList.size())).toString());
+        this.setWidth(icon.getIconWidth());
+        this.setHeight(icon.getIconHeight());
 
         // 更新图片
         this.setImageIcon(icon);
