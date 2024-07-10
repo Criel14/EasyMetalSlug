@@ -26,13 +26,6 @@ public class Enemy extends ElementObj {
 
     @Override
     public void showElement(Graphics g) {
-        // 测试信息
-        if (this.getImageIcon().getImage() == null) {
-            System.out.println("敌人图片为空");
-        } else {
-            System.out.println("敌人图片加载成功");
-        }
-
         g.drawImage(this.getImageIcon().getImage(), this.getX(), this.getY(), this.getWidth(), this.getHeight(), null);
     }
 
@@ -43,9 +36,9 @@ public class Enemy extends ElementObj {
         this.setX(Integer.parseInt(split[0]));
         this.setY(Integer.parseInt(split[1]));
         this.setEnemyType(split[2]);
-
         // 测试
-        this.setImageIcon(new ImageIcon("image/enemyImg/enemyRPG/left_stand/enemy_stand200.png"));
+        this.setWidth(100);
+        this.setHeight(93);
 
         return this;
     }
@@ -64,10 +57,7 @@ public class Enemy extends ElementObj {
             e.printStackTrace();
         }
 
-        ImageIcon icon = new ImageIcon(imageList.get((int) (gameTime % imageList.size())).toString());
-        // 测试信息
-        System.out.println("ImageIcon路径: " + imageList.get((int) (gameTime % imageList.size())).toString());
-        System.out.println("敌人信息：" + this.getX() + "-" + this.getY()+ "-" + this.enemyType + "-" + direction + "-" + status);
+        ImageIcon icon = new ImageIcon(imageList.get((int) (gameTime / 5 % imageList.size())).toString());
 
         // 更新图片
         this.setImageIcon(icon);

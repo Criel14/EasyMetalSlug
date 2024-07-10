@@ -64,8 +64,8 @@ public class Player extends ElementObj {
         this.setX(Integer.parseInt(split[0]));
         this.setY(Integer.parseInt(split[1]));
         ImageIcon icon = GameLoader.imageMap.get(split[2]);
-        this.setWidth(icon.getIconWidth());
-        this.setHeight(icon.getIconHeight());
+        this.setWidth(100);
+        this.setHeight(93);
         this.setImageIcon(icon);
         initialY = this.getY(); // 初始化初始Y坐标
         return this;
