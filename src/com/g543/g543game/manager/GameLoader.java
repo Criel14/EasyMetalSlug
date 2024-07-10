@@ -66,6 +66,14 @@ public class GameLoader {
         elementManager.addElement(GameElement.PLAYER, player);
     }
 
+    //加载地图
+    public static void loadBackground() {
+        String BackgroundData = "0,0,background";
+        ElementObj obj = getObject("background");
+        ElementObj background = obj.createElement(BackgroundData);
+        elementManager.addElement(GameElement.BACKGROUND_MAP, background);
+    }
+
     // 加载图片方法
     public static void loadImage() {
         String imageProperties = "properties/ImageData.properties";

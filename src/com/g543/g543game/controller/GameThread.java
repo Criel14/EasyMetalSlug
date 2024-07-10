@@ -42,6 +42,8 @@ public class GameThread extends Thread {
         GameLoader.loadImage();
         // 绘制玩家
         GameLoader.loadPlayer();
+        // 绘制地图
+        GameLoader.loadBackground();
         // 加载其他元素
 
     }
