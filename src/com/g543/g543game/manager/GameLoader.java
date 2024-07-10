@@ -69,7 +69,7 @@ public class GameLoader {
     //加载地图
     public static void loadBackground() {
         String BackgroundData = "0,0,background";
-        ElementObj obj = getObject("background");
+        ElementObj obj = getObject("backgroundMap");
         ElementObj background = obj.createElement(BackgroundData);
         elementManager.addElement(GameElement.BACKGROUND_MAP, background);
     }
