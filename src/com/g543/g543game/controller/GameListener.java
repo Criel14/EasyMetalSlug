@@ -37,6 +37,10 @@ public class GameListener implements KeyListener, MouseListener, MouseMotionList
         for (ElementObj player : players) {
             player.keyboardListener(true, e.getKeyCode());// 测试
         }
+        List<ElementObj> maps = elementManager.getElement(GameElement.BACKGROUND_MAP);
+        for (ElementObj map : maps) {
+            map.keyboardListener(true, e.getKeyCode());
+        }
     }
 
     @Override
@@ -51,6 +55,10 @@ public class GameListener implements KeyListener, MouseListener, MouseMotionList
         List<ElementObj> players = elementManager.getElement(GameElement.PLAYER);
         for (ElementObj player : players) {
             player.keyboardListener(false, e.getKeyCode());// 测试
+        }
+        List<ElementObj> maps = elementManager.getElement(GameElement.BACKGROUND_MAP);
+        for (ElementObj map : maps) {
+            map.keyboardListener(false, e.getKeyCode());
         }
     }
 

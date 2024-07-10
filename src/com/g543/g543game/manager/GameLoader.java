@@ -60,7 +60,7 @@ public class GameLoader {
     // 加载玩家
     public static void loadPlayer() {
         loadObject();
-        String playData = "100,220,test_image";
+        String playData = "100,500,test_image";
         ElementObj obj = getObject("player");
         ElementObj player = obj.createElement(playData);
         elementManager.addElement(GameElement.PLAYER, player);
