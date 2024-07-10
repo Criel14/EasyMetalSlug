@@ -66,6 +66,17 @@ public class GameLoader {
         elementManager.addElement(GameElement.PLAYER, player);
     }
 
+    // 加载敌人
+    public static void loadEnemy() {
+        loadObject();
+        // 先尝试生成一个敌人
+        String enemyData = "400,220,enemyRPG";
+        ElementObj obj = getObject("enemy");
+        ElementObj enemy = obj.createElement(enemyData);
+        elementManager.addElement(GameElement.ENEMY, enemy);
+    }
+
+
     // 加载图片方法
     public static void loadImage() {
         String imageProperties = "properties/ImageData.properties";
