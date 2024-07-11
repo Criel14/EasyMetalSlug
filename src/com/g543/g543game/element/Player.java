@@ -223,15 +223,6 @@ public class Player extends ElementObj {
         }
     }
 
-    private BackgroundMap getMap() {
-        BackgroundMap map = null;
-        ElementManager elementManager = ElementManager.getManager();
-        List<ElementObj> elementObjList = elementManager.getElement(GameElement.BACKGROUND_MAP);
-        for (ElementObj m : elementObjList) {
-            map = (BackgroundMap) m;
-        }
-        return map;
-    }
     // 添加道具
     @Override
     protected void addProp(long gameTime) {

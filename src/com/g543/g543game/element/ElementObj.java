@@ -1,8 +1,12 @@
 package com.g543.g543game.element;
 
 
+import com.g543.g543game.manager.ElementManager;
+import com.g543.g543game.manager.GameElement;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 // 所有element的基类
 public abstract class ElementObj {
@@ -192,6 +196,16 @@ public abstract class ElementObj {
         if (this.hp <= 0) {
             this.setAlive(false);
         }
+    }
+
+    protected BackgroundMap getMap() {
+        BackgroundMap map = null;
+        ElementManager elementManager = ElementManager.getManager();
+        List<ElementObj> elementObjList = elementManager.getElement(GameElement.BACKGROUND_MAP);
+        for (ElementObj m : elementObjList) {
+            map = (BackgroundMap) m;
+        }
+        return map;
     }
 
 

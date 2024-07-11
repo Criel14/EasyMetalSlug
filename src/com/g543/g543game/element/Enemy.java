@@ -76,14 +76,4 @@ public class Enemy extends ElementObj {
     public void setEnemyType(String enemyType) {
         this.enemyType = enemyType;
     }
-
-    private BackgroundMap getMap() {
-        BackgroundMap map = null;
-        ElementManager elementManager = ElementManager.getManager();
-        List<ElementObj> elementObjList = elementManager.getElement(GameElement.BACKGROUND_MAP);
-        for (ElementObj m : elementObjList) {
-            map = (BackgroundMap) m;
-        }
-        return map;
-    }
 }

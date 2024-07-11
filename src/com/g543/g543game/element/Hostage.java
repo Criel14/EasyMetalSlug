@@ -56,14 +56,4 @@ public class Hostage extends ElementObj{
         // 更新图片
         this.setImageIcon(icon);
     }
-
-    private BackgroundMap getMap() {
-        BackgroundMap map = null;
-        ElementManager elementManager = ElementManager.getManager();
-        List<ElementObj> elementObjList = elementManager.getElement(GameElement.BACKGROUND_MAP);
-        for (ElementObj m : elementObjList) {
-            map = (BackgroundMap) m;
-        }
-        return map;
-    }
 }
