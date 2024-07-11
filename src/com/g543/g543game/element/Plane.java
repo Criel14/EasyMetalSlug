@@ -1,5 +1,8 @@
 package com.g543.g543game.element;
 
+import com.g543.g543game.manager.ElementManager;
+import com.g543.g543game.manager.GameElement;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -16,9 +19,9 @@ public class Plane extends ElementObj{
 
     @Override
     public ElementObj createElement(String str){
-        System.out.println("创建飞机");
+//        System.out.println("创建飞机");
         this.setX(getMap().newX);
-        this.setY(50);
+        this.setY(30);
         this.setImageIcon(new ImageIcon("image/planeImage/plane.png"));
         this.setWidth(this.getImageIcon().getIconWidth());
         this.setHeight(this.getImageIcon().getIconHeight());
@@ -37,10 +40,15 @@ public class Plane extends ElementObj{
     private long localTime= 0;
     @Override
     public void attack(long gameTime){
-        if(gameTime > localTime){
+        if(gameTime > localTime + 30){
             localTime = gameTime;
-
+            ElementObj bullet = new PlaneBullet().createElement(this.toString());
+            ElementManager.getManager().addElement(GameElement.PLANE_BULLET, bullet);
         }
     }
 
+    @Override
+    public String toString() {
+        return this.getX() + "," + this.getY();
+    }
 }

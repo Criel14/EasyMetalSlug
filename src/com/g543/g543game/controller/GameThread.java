@@ -113,7 +113,7 @@ public class GameThread extends Thread {
         // 对所有元素执行模板模式
         Set<GameElement> set = all.keySet();
         for (GameElement gameElement : set) {
-            List<ElementObj> elementList = new ArrayList<>(all.get(gameElement));
+            List<ElementObj> elementList = all.get(gameElement);
             Iterator<ElementObj> iterator = elementList.iterator();
             // 用迭代器，方便做删除操作
             while (iterator.hasNext()) {
