@@ -1,5 +1,7 @@
 package com.g543.g543game.element;
 
+import com.g543.g543game.manager.ElementManager;
+import com.g543.g543game.manager.GameElement;
 import com.g543.g543game.manager.GameLoader;
 import com.g543.g543game.show.GameJFrame;
 
@@ -19,7 +21,7 @@ public class Hostage extends ElementObj{
 
     @Override
     public void showElement(Graphics g) {
-        g.drawImage(this.getImageIcon().getImage(),this.getX(),this.getY(),this.getWidth(),this.getHeight(),null);
+        g.drawImage(this.getImageIcon().getImage(),this.getX() - getMap().newX,this.getY(),this.getWidth(),this.getHeight(),null);
     }
     @Override
     public ElementObj createElement(String str){
@@ -53,5 +55,15 @@ public class Hostage extends ElementObj{
 
         // 更新图片
         this.setImageIcon(icon);
+    }
+
+    private BackgroundMap getMap() {
+        BackgroundMap map = null;
+        ElementManager elementManager = ElementManager.getManager();
+        List<ElementObj> elementObjList = elementManager.getElement(GameElement.BACKGROUND_MAP);
+        for (ElementObj m : elementObjList) {
+            map = (BackgroundMap) m;
+        }
+        return map;
     }
 }

@@ -1,5 +1,7 @@
 package com.g543.g543game.element;
 
+import com.g543.g543game.manager.ElementManager;
+import com.g543.g543game.manager.GameElement;
 import com.g543.g543game.manager.GameLoader;
 
 import javax.swing.*;
@@ -27,7 +29,7 @@ public class Enemy extends ElementObj {
     @Override
     public void showElement(Graphics g) {
         try{
-            g.drawImage(this.getImageIcon().getImage(), this.getX(), this.getY(), this.getWidth(), this.getHeight(), null);
+            g.drawImage(this.getImageIcon().getImage(), this.getX() - getMap().newX, this.getY(), this.getWidth(), this.getHeight(), null);
         } catch (Exception e){
             System.out.println("Enemy showElement error" + this.getImageIcon());
         }
@@ -73,5 +75,15 @@ public class Enemy extends ElementObj {
     // get和set方法
     public void setEnemyType(String enemyType) {
         this.enemyType = enemyType;
+    }
+
+    private BackgroundMap getMap() {
+        BackgroundMap map = null;
+        ElementManager elementManager = ElementManager.getManager();
+        List<ElementObj> elementObjList = elementManager.getElement(GameElement.BACKGROUND_MAP);
+        for (ElementObj m : elementObjList) {
+            map = (BackgroundMap) m;
+        }
+        return map;
     }
 }

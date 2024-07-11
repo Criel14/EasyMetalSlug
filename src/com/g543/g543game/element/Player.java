@@ -7,6 +7,7 @@ import com.g543.g543game.util.KeyboardCode;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.xml.bind.Element;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -75,7 +76,7 @@ public class Player extends ElementObj {
     @Override
     public void showElement(Graphics g) {
         // 测试显示图片
-        g.drawImage(this.getImageIcon().getImage(), this.getX(), this.getY(), this.getWidth(), this.getHeight(), null);
+        g.drawImage(this.getImageIcon().getImage(), this.getX() - getMap().newX, this.getY(), this.getWidth(), this.getHeight(), null);
     }
 
     @Override
@@ -167,12 +168,6 @@ public class Player extends ElementObj {
                     this.isMovingRight = true;
                     this.direction = "right";
                     break;
-                case KeyboardCode.W:
-                    this.direction = "up";
-                    break;
-                case KeyboardCode.S:
-                    this.direction = "down";
-                    break;
                 case KeyboardCode.SPACE:
                     if (!isJumping) {
                         isJumping = true;
@@ -200,9 +195,17 @@ public class Player extends ElementObj {
     @Override
     public void move(long gameTime) {
         if (this.isMoving) {
-            if (this.isMovingRight) {
+            BackgroundMap map = getMap();
+            if (this.isMovingRight && this.getX() <= 1320) {
+                if (this.getX() - map.newX >= 1100)
+                {
+                    map.newX += moveSpeed;
+                }
                 this.setX(this.getX() + moveSpeed);
-            } else {
+            } else if (!this.isMovingRight && this.getX() >= 50) {
+                if (this.getX() - map.newX <= 50){
+                    map.newX -= moveSpeed;
+                }
                 this.setX(this.getX() - moveSpeed);
             }
         }
@@ -220,6 +223,15 @@ public class Player extends ElementObj {
         }
     }
 
+    private BackgroundMap getMap() {
+        BackgroundMap map = null;
+        ElementManager elementManager = ElementManager.getManager();
+        List<ElementObj> elementObjList = elementManager.getElement(GameElement.BACKGROUND_MAP);
+        for (ElementObj m : elementObjList) {
+            map = (BackgroundMap) m;
+        }
+        return map;
+    }
     // 添加道具
     @Override
     protected void addProp(long gameTime) {
