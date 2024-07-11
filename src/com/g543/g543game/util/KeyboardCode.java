@@ -9,4 +9,5 @@ public class KeyboardCode {
 
     public static final int J = 74;
     public static final int SPACE = 32;
+    public static final int K = 75;
 }

@@ -9,6 +9,8 @@ public enum GameElement {
     ENEMY,
     //人质
     HOSTAGE,
+    //飞机
+    PLANE,
     // 玩家的子弹
     PLAYER_BULLET,
     // 已销毁/已死亡的元素产生的效果，例如爆炸特效

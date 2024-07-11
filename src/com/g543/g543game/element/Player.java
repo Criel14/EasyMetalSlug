@@ -183,6 +183,9 @@ public class Player extends ElementObj {
                         timer.start();
                     }
                     break;
+                case KeyboardCode.K:
+                    ElementManager.getManager().addElement(GameElement.PLANE,new Plane().createElement(""));
+                    break;
                 default:
                     break;
             }
