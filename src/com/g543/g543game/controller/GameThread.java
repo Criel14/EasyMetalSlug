@@ -42,12 +42,12 @@ public class GameThread extends Thread {
         GameLoader.loadImage();
         // 加载玩家
         GameLoader.loadPlayer();
-        // 加载地图
-        GameLoader.loadBackground();
         // 加载敌人
         GameLoader.loadEnemy();
         // 加载人资
         GameLoader.loadHostage();
+        // 加载地图
+        GameLoader.loadBackground();
         // 加载其他元素
 
     }

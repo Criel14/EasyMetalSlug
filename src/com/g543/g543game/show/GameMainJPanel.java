@@ -33,8 +33,9 @@ public class GameMainJPanel extends JPanel implements Runnable{
         super.paint(g);
 
         Map<GameElement, List<ElementObj>> all = new HashMap<>(elementManager.getGameElements());
-        Set<GameElement> set = all.keySet();
-        for (GameElement gameElement : set) {
+//        Set<GameElement> set = all.keySet();
+        for (GameElement gameElement : GameElement.values()) {
+//            System.out.println(gameElement);
             List<ElementObj> list = new ArrayList<>(all.get(gameElement));
             for (ElementObj elementObj : list) {
                 elementObj.showElement(g);

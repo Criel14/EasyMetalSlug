@@ -52,7 +52,7 @@ public class BackgroundMap extends ElementObj{
         this.setImageIcon(GameLoader.imageMap.get(strs[2]));
         this.setHeight(GameJFrame.GAME_HEIGHT);
         this.setWidth(this.getImageIcon().getIconWidth());
-        System.out.println(this.getWidth()+" "+this.getHeight());
+//        System.out.println(this.getWidth()+" "+this.getHeight());
         return this;
     }
 

@@ -69,7 +69,7 @@ public class GameLoader {
     // 加载敌人
     public static void loadEnemy() {
         loadObject();
-        String enemyData = "400,220,enemyGun";
+        String enemyData = "700,500,enemyGun";
         ElementObj obj = getObject("enemy");
         ElementObj enemy = obj.createElement(enemyData);
         elementManager.addElement(GameElement.ENEMY, enemy);
@@ -88,7 +88,7 @@ public class GameLoader {
     //加载人资
     public static void loadHostage(){
         loadObject();
-        String hostageData = "400,220,test_hostage_image";
+        String hostageData = "500,500,test_hostage_image";
         ElementObj obj = getObject("hostage");
         ElementObj hostage = obj.createElement(hostageData);
         elementManager.addElement(GameElement.HOSTAGE, hostage);
