@@ -64,7 +64,7 @@ public class GameThread extends Thread {
             // 控制时间流逝
             gameTime++;
             try {
-                Thread.sleep(16);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

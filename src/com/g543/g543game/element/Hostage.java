@@ -14,6 +14,7 @@ import java.util.List;
 
 public class Hostage extends ElementObj{
 
+    //状态：stand，die
     private String status = "stand";
 
     @Override

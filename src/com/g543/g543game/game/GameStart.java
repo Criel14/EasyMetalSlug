@@ -10,6 +10,10 @@ public class GameStart {
     public static <GameFrame> void main(String[] args) {
         GameJFrame gameJFrame = new GameJFrame();
 
+        // 实例化主线程，并注入GameJFrame
+        GameThread gameThread = new GameThread();
+        gameJFrame.setGameThread(gameThread);
+
         // 实例化面板，并注入GameJFrame
         GameMainJPanel gameMainJPanel = new GameMainJPanel();
         gameJFrame.setjPanel(gameMainJPanel);
@@ -17,10 +21,6 @@ public class GameStart {
         // 实例化监听，并注入GameJFrame
         GameListener gameListener = new GameListener();
         gameJFrame.setKeyListener(gameListener);
-
-        // 实例化主线程，并注入GameJFrame
-        GameThread gameThread = new GameThread();
-        gameJFrame.setGameThread(gameThread);
 
         // 启动
         gameJFrame.start();

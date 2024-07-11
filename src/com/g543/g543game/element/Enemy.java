@@ -26,7 +26,11 @@ public class Enemy extends ElementObj {
 
     @Override
     public void showElement(Graphics g) {
-        g.drawImage(this.getImageIcon().getImage(), this.getX(), this.getY(), this.getWidth(), this.getHeight(), null);
+        try{
+            g.drawImage(this.getImageIcon().getImage(), this.getX(), this.getY(), this.getWidth(), this.getHeight(), null);
+        } catch (Exception e){
+            System.out.println("Enemy showElement error" + this.getImageIcon());
+        }
     }
 
     // data格式：X坐标，Y坐标，种类（EnemyGun或EnemyRPG）
