@@ -29,7 +29,7 @@ public class Enemy extends ElementObj {
     @Override
     public void showElement(Graphics g) {
         try{
-            g.drawImage(this.getImageIcon().getImage(), this.getX() - getMap().newX, this.getY(), this.getWidth(), this.getHeight(), null);
+            g.drawImage(this.getImageIcon().getImage(), (this.getX() - getMap().newX) * 2, this.getY(), this.getWidth(), this.getHeight(), null);
         } catch (Exception e){
             System.out.println("Enemy showElement error" + this.getImageIcon());
         }

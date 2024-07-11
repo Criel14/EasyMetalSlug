@@ -76,7 +76,7 @@ public class Player extends ElementObj {
     @Override
     public void showElement(Graphics g) {
         // 测试显示图片
-        g.drawImage(this.getImageIcon().getImage(), this.getX() - getMap().newX, this.getY(), this.getWidth(), this.getHeight(), null);
+        g.drawImage(this.getImageIcon().getImage(), (this.getX() - getMap().newX) * 2, this.getY(), this.getWidth(), this.getHeight(), null);
     }
 
     @Override
@@ -196,14 +196,14 @@ public class Player extends ElementObj {
     public void move(long gameTime) {
         if (this.isMoving) {
             BackgroundMap map = getMap();
-            if (this.isMovingRight && this.getX() <= 1320) {
-                if (this.getX() - map.newX >= 1100)
+            if (this.isMovingRight && this.getX() <= 1400) {
+                if (this.getX() - map.newX >= 550)
                 {
                     map.newX += moveSpeed;
                 }
                 this.setX(this.getX() + moveSpeed);
             } else if (!this.isMovingRight && this.getX() >= 50) {
-                if (this.getX() - map.newX <= 50){
+                if (this.getX() - map.newX <= 25){
                     map.newX -= moveSpeed;
                 }
                 this.setX(this.getX() - moveSpeed);

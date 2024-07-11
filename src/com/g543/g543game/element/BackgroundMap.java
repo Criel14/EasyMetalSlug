@@ -12,7 +12,7 @@ public class BackgroundMap extends ElementObj{
     @Override
     public void showElement(Graphics g) {
         g.drawImage(this.getImageIcon().getImage(),0,0,this.getWidth(),this.getHeight()+1400,
-                newX,0,newX+1480,this.getHeight(),null);
+                newX,0,newX+740,this.getHeight(),null);
     }
 
     @Override
