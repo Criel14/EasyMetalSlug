@@ -15,7 +15,7 @@ import java.util.List;
 
 public class PlaneBullet extends ElementObj{
     // 子弹的生存时间
-    private int lifeTime = 100;
+    private int lifeTime = 130;
     // 子弹的飞行速度
     private int moveSpeed = 4;
 
