@@ -20,6 +20,10 @@ public abstract class ElementObj {
     private boolean isAlive = true;
     // 血量（默认值为100）
     private int hp = 100;
+    //地图类使用，根据玩家在地图上的相对位置决定是否移动地图，例如地图左右侧的1/3是允许地图移动的范围
+    public Boolean isChange = false;
+    // 地图类专用，0为地图不动，1为地图向左运动，2为地图向右运动
+    public int changeWay = 0;
 
     // getter和setter
     public boolean isAlive() {
@@ -79,6 +83,21 @@ public abstract class ElementObj {
         this.imageIcon = imageIcon;
     }
 
+    public int getChangeWay() {
+        return changeWay;
+    }
+
+    public void setChangeWay(int changeWay) {
+        this.changeWay = changeWay;
+    }
+
+    public Boolean getChange() {
+        return isChange;
+    }
+
+    public void setChange(Boolean change) {
+        isChange = change;
+    }
 
     // 构造方法
     public ElementObj() {

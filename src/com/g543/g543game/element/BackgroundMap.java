@@ -7,11 +7,12 @@ import com.g543.g543game.util.KeyboardCode;
 import java.awt.*;
 
 public class BackgroundMap extends ElementObj{
-
-    public int ChangeSpeed = 2; //地图改变的速度
-    public int isChange = 0; // 0为地图不动，1为地图向左运动，2为地图向右运动
-    public int newX = 0;            //局部地图的x坐标
-    public int newY = 0;            //局部地图的y坐标
+    //地图改变的速度
+    public int ChangeSpeed = 3;
+    //局部地图的x坐标
+    public int newX = 0;
+    //局部地图的y坐标
+    public int newY = 0;
     @Override
     public void showElement(Graphics g) {
         g.drawImage(this.getImageIcon().getImage(),0,0,this.getWidth(),this.getHeight()+1400,
@@ -21,25 +22,26 @@ public class BackgroundMap extends ElementObj{
     @Override
     public void keyboardListener(boolean isPressed,int keyCode){
         if(isPressed){
+//            System.out.println("keycode"+keyCode);
             if(keyCode == KeyboardCode.D && newX+500<=this.getWidth()){
-                isChange = 2;
+                changeWay = 2;
             }
             else if (keyCode == KeyboardCode.A && newX>=0){
-                isChange = 1;
+                changeWay = 1;
             }
         }
         else{
-            isChange = 0;
+            changeWay = 0;
         }
     }
 
     @Override
     public void updateImage(long gameTime){
-        if(isChange == 2 && newX+500<=this.getWidth()){
+        if(changeWay == 2 && newX+500<this.getWidth() && this.isChange){
 
             newX += ChangeSpeed;
         }
-        else if (isChange == 1 && newX>=0){
+        else if (changeWay == 1 && newX>0 && this.isChange){
             newX -= ChangeSpeed;
         }
     }
@@ -79,4 +81,5 @@ public class BackgroundMap extends ElementObj{
     public void setNewY(int newY) {
         this.newY = newY;
     }
+
 }

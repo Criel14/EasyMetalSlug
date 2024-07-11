@@ -1,9 +1,11 @@
 package com.g543.g543game.controller;
 
+import com.g543.g543game.element.BackgroundMap;
 import com.g543.g543game.element.ElementObj;
 import com.g543.g543game.manager.ElementManager;
 import com.g543.g543game.manager.GameElement;
 import com.g543.g543game.manager.GameLoader;
+import com.g543.g543game.show.GameJFrame;
 
 import java.util.*;
 
@@ -61,12 +63,42 @@ public class GameThread extends Thread {
             elementExecuteModel(all,gameTime);
             // 执行碰撞检测
             elementCollision(all);
+            // 执行地图移动监测
+            mapMove(all);
             // 控制时间流逝
             gameTime++;
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
+            }
+        }
+    }
+
+    private void mapMove(Map<GameElement, List<ElementObj>> all) {
+        List<ElementObj> backgrounds = all.get(GameElement.BACKGROUND_MAP);
+        List<ElementObj> players = all.get(GameElement.PLAYER);
+        for( ElementObj player : players) {
+//            System.out.println(player.getX());
+            if( player.getX() > GameJFrame.GAME_WIDTH / 3 * 2) {
+                for( ElementObj background : backgrounds) {
+                    if( background.getChangeWay() == 2) {
+                        background.setChange(true);
+                    }
+                    else{
+                        background.setChange(false);
+                    }
+                }
+            }
+            else if( player.getX() < GameJFrame.GAME_WIDTH / 3) {
+                for( ElementObj background : backgrounds) {
+                    if( background.getChangeWay() == 1){
+                        background.setChange(true);
+                    }
+                    else{
+                        background.setChange(false);
+                    }
+                }
             }
         }
     }
