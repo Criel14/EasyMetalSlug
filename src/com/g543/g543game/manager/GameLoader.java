@@ -78,10 +78,20 @@ public class GameLoader {
 
     //加载地图
     public static void loadBackground() {
+        loadObject();
         String BackgroundData = "0,0,background";
         ElementObj obj = getObject("backgroundMap");
         ElementObj background = obj.createElement(BackgroundData);
         elementManager.addElement(GameElement.BACKGROUND_MAP, background);
+    }
+
+    //加载人资
+    public static void loadHostage(){
+        loadObject();
+        String hostageData = "400,220,test_hostage_image";
+        ElementObj obj = getObject("hostage");
+        ElementObj hostage = obj.createElement(hostageData);
+        elementManager.addElement(GameElement.HOSTAGE, hostage);
     }
 
     // 加载图片方法

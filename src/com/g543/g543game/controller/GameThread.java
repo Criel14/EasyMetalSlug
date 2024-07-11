@@ -46,6 +46,8 @@ public class GameThread extends Thread {
         GameLoader.loadBackground();
         // 加载敌人
         GameLoader.loadEnemy();
+        // 加载人资
+        GameLoader.loadHostage();
         // 加载其他元素
 
     }

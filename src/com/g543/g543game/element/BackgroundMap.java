@@ -55,4 +55,28 @@ public class BackgroundMap extends ElementObj{
         System.out.println(this.getWidth()+" "+this.getHeight());
         return this;
     }
+
+    public int getChangeSpeed() {
+        return ChangeSpeed;
+    }
+
+    public void setChangeSpeed(int changeSpeed) {
+        ChangeSpeed = changeSpeed;
+    }
+
+    public int getNewX() {
+        return newX;
+    }
+
+    public void setNewX(int newX) {
+        this.newX = newX;
+    }
+
+    public int getNewY() {
+        return newY;
+    }
+
+    public void setNewY(int newY) {
+        this.newY = newY;
+    }
 }
