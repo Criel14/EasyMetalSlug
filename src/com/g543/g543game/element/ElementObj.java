@@ -224,7 +224,7 @@ public abstract class ElementObj {
         }
         //设置颜色为红色
         g.setColor(java.awt.Color.RED);
-        g.drawRect((this.getX() - getMap().newX) * 2, this.getY() - 10, this.getWidth(), 5);
-        g.fillRect((this.getX() - getMap().newX) * 2, this.getY() - 10, (int) (this.getWidth() * this.getHp() / 100), 5);
+        g.drawRect((this.getX() - getMap().newX) * 2, this.getY() - 10, 100, 5);
+        g.fillRect((this.getX() - getMap().newX) * 2, this.getY() - 10, (int) (100 * this.getHp() / 100), 5);
     }
 }
