@@ -4,11 +4,12 @@ import com.g543.g543game.controller.GameListener;
 import com.g543.g543game.controller.GameThread;
 import com.g543.g543game.show.GameJFrame;
 import com.g543.g543game.show.GameMainJPanel;
+import com.g543.g543game.show.GameStartFrame;
 
 // 程序入口
 public class GameStart {
     public static <GameFrame> void main(String[] args) {
-        GameJFrame gameJFrame = new GameJFrame();
+        GameJFrame gameJFrame = GameJFrame.getInstance();
 
         // 实例化主线程，并注入GameJFrame
         GameThread gameThread = new GameThread();
@@ -22,7 +23,7 @@ public class GameStart {
         GameListener gameListener = new GameListener();
         gameJFrame.setKeyListener(gameListener);
 
-        // 启动
-        gameJFrame.start();
+        // 进入启动页
+        new GameStartFrame();
     }
 }

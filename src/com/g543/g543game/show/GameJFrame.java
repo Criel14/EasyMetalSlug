@@ -9,6 +9,17 @@ public class GameJFrame extends JFrame {
     public static int GAME_WIDTH = 1280;
     public static int GAME_HEIGHT = 720;
 
+    // 单例模式的静态实例
+    private static GameJFrame instance = null;
+
+    // 返回单例的静态方法
+    public static GameJFrame getInstance() {
+        if (instance == null) {
+            instance = new GameJFrame();
+        }
+        return instance;
+    }
+
     // 正在显示的面板
     private JPanel jPanel = null;
 
