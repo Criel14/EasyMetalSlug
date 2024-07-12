@@ -65,7 +65,6 @@ public class Hostage extends ElementObj{
             if(dyingFrameCounter / 8 == imageList.size() && this.getX() - getMap().newX > 0) dyingFrameCounter -= 6 * 8;
             if (dyingFrameCounter / 8 == imageList.size()) {
                 this.setAlive(false);
-//                System.out.println("hostage die");
             }
         }
 
