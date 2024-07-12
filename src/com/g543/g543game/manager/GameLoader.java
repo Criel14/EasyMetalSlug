@@ -69,10 +69,12 @@ public class GameLoader {
     // 加载敌人
     public static void loadEnemy() {
         loadObject();
-        String enemyData = "700,500,enemyGun";
-        ElementObj obj = getObject("enemy");
-        ElementObj enemy = obj.createElement(enemyData);
-        elementManager.addElement(GameElement.ENEMY, enemy);
+        ElementObj obj1 = getObject("enemy");
+        ElementObj obj2 = getObject("enemy");
+        ElementObj enemy1 = obj1.createElement("700,500,enemyGun");
+        ElementObj enemy2 = obj2.createElement("400,500,enemyGun");
+        elementManager.addElement(GameElement.ENEMY, enemy1);
+        elementManager.addElement(GameElement.ENEMY, enemy2);
     }
 
 

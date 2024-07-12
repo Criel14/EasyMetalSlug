@@ -61,7 +61,7 @@ public class GameThread extends Thread {
             // 获取所有元素
             Map<GameElement, List<ElementObj>> all = new HashMap<>(elementManager.getGameElements());
             // 执行模板模式
-            elementExecuteModel(all,gameTime);
+            elementExecuteModel(all, gameTime);
             // 执行碰撞检测
             elementCollision(all);
             // 执行地图移动监测
@@ -79,24 +79,21 @@ public class GameThread extends Thread {
     private void mapMove(Map<GameElement, List<ElementObj>> all) {
         List<ElementObj> backgrounds = all.get(GameElement.BACKGROUND_MAP);
         List<ElementObj> players = all.get(GameElement.PLAYER);
-        for( ElementObj player : players) {
+        for (ElementObj player : players) {
 //            System.out.println(player.getX());
-            if( player.getX() > GameJFrame.GAME_WIDTH / 3 * 2) {
-                for( ElementObj background : backgrounds) {
-                    if( background.getChangeWay() == 2) {
+            if (player.getX() > GameJFrame.GAME_WIDTH / 3 * 2) {
+                for (ElementObj background : backgrounds) {
+                    if (background.getChangeWay() == 2) {
                         background.setChange(true);
-                    }
-                    else{
+                    } else {
                         background.setChange(false);
                     }
                 }
-            }
-            else if( player.getX() < GameJFrame.GAME_WIDTH / 3) {
-                for( ElementObj background : backgrounds) {
-                    if( background.getChangeWay() == 1){
+            } else if (player.getX() < GameJFrame.GAME_WIDTH / 3) {
+                for (ElementObj background : backgrounds) {
+                    if (background.getChangeWay() == 1) {
                         background.setChange(true);
-                    }
-                    else{
+                    } else {
                         background.setChange(false);
                     }
                 }
@@ -138,20 +135,25 @@ public class GameThread extends Thread {
             for (ElementObj elementB : listB) {
                 if (elementA.isCollided(elementB)) {
                     // 用instanceof 判断类型后执行对应逻辑
-                    if ((elementA instanceof GunBullet || elementA instanceof RPGBullet) && elementB instanceof Enemy) {
+                    // 敌人被子弹命中
+                    if ((elementA instanceof GunBullet || elementA instanceof RPGBullet || elementA instanceof PlaneBullet) && elementB instanceof Enemy) {
                         elementA.die(gameTime);
+                        System.out.println("子弹的伤害是：" + elementA.getAttackDamage());
                         elementB.attacked(elementA.getAttackDamage());
                     }
 
+                    // 玩家被子弹命中
                     if ((elementA instanceof GunBullet || elementA instanceof RPGBullet) && elementB instanceof Player) {
                         elementA.die(gameTime);
                         elementB.attacked(elementA.getAttackDamage());
                     }
 
+                    // 玩家捡起道具
                     if (elementA instanceof Player && elementB instanceof Prop) {
                         System.out.println("get prop!!");
                         elementB.setAlive(false);
                     }
+
                     break;
                 }
             }
@@ -166,10 +168,12 @@ public class GameThread extends Thread {
         List<ElementObj> enemy = all.get(GameElement.ENEMY);
         List<ElementObj> enemyBullet = all.get(GameElement.ENEMY_BULLET);
         List<ElementObj> prop = all.get(GameElement.PROP);
+        List<ElementObj> planeBullet = all.get(GameElement.PLANE_BULLET);
         // 执行碰撞检测
-        checkCollision(playerBullet, enemy); // 用法示例
+        checkCollision(playerBullet, enemy);
         checkCollision(enemyBullet, player);
         checkCollision(player, prop);
+        checkCollision(planeBullet, enemy);
 
     }
 

@@ -48,12 +48,20 @@ public class Player extends ElementObj {
 
     // 子弹发射间隔
     private int bulletInterval = 400;
+    // 召唤飞机间隔（和子弹间隔的判断逻辑不同，数据不能参考）
+    private int summonInterval = 100;
 
     // 射击动画帧计数器
     private int shootingFrameCounter = 0;
+    // 召唤飞机帧计时器
+    private int summonFrameCounter = 0;
+
 
     //子弹类型(RPGBullet, gunBullet)
     private String bulletType = "gunBullet";
+
+
+
     // 构造方法
     public Player() {
     }
@@ -127,6 +135,9 @@ public class Player extends ElementObj {
             shootingFrameCounter = 0; // 重置射击动画帧计数器
         }
 
+        // 召唤飞机帧计时器更新
+        summonFrameCounter++;
+
         ImageIcon icon = createCombinedIcon(upperImagePath,
                 imgLowerList.get((int) (gameTime / 5 % imgLowerList.size())), dx);
         this.setImageIcon(icon);
@@ -198,7 +209,10 @@ public class Player extends ElementObj {
                     }
                     break;
                 case KeyboardCode.K:
-                    ElementManager.getManager().addElement(GameElement.PLANE,new Plane().createElement(""));
+                    if (summonFrameCounter >= summonInterval) {
+                        ElementManager.getManager().addElement(GameElement.PLANE, new Plane().createElement(""));
+                        summonFrameCounter = 0;
+                    }
                     break;
                 case KeyboardCode.L:
                     if (bulletType.equals("gunBullet")) switchWeapon("RPG");

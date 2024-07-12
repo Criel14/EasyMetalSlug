@@ -58,7 +58,7 @@ public class RPGBullet extends ElementObj {
         if (isBooming) return;
         isBooming = true;
         ElementManager.getManager().addElement(GameElement.DESTROYED_ELEMENT_EFFECT,
-                new PlaneBulletDestroyEffect().createElement((this.getX() + 20) + "," + (this.getY() - 30)));
+                new PlaneBulletDestroyedEffect().createElement((this.getX() + 20) + "," + (this.getY() - 30)));
         setAlive(false);
     }
 }

@@ -32,6 +32,7 @@ public class PlaneBullet extends ElementObj{
         this.setX(Integer.parseInt(arr[0]));
         this.setY(Integer.parseInt(arr[1]));
         this.setImageIcon(new ImageIcon("image/planeImage/plane_bullet/plane_bomb0.png"));
+        this.setAttackDamage(80);
         return this;
     }
 
@@ -69,7 +70,19 @@ public class PlaneBullet extends ElementObj{
     @Override
     public void destroy(long gameTime) {
         ElementManager.getManager().addElement(GameElement.DESTROYED_ELEMENT_EFFECT,
-                new PlaneBulletDestroyEffect().createElement(this.getX() + "," + this.getY()));
+                new PlaneBulletDestroyedEffect().createElement(this.getX() + "," + this.getY()));
+    }
+
+
+    // 较大的爆炸范围
+    @Override
+    public Rectangle getRectangle() {
+        return new Rectangle(this.getX(), this.getY(), this.getWidth()*2, this.getHeight()*2);
+    }
+
+    @Override
+    public void die(long gameTime) {
+        setAlive(false);
     }
 
     public int getLifeTime() {

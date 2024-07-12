@@ -12,29 +12,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PlaneBulletDestroyEffect extends ElementObj{
+public class PlaneBulletDestroyedEffect extends ElementObj {
 
     @Override
     public void showElement(Graphics g) {
-        g.drawImage(this.getImageIcon().getImage(),(this.getX() - getMap().newX) * 2 -40,this.getY()-80,this.getWidth(), this.getHeight(),null);
+        g.drawImage(this.getImageIcon().getImage(), (this.getX() - getMap().newX) * 2 - 40, this.getY() - 80, this.getWidth(), this.getHeight(), null);
     }
 
 
     @Override
-    public ElementObj createElement(String str){
-        String[] strs= str.split(",");
+    public ElementObj createElement(String str) {
+        String[] strs = str.split(",");
         this.setX(Integer.parseInt(strs[0]));
         this.setY(Integer.parseInt(strs[1]));
         this.setImageIcon(new ImageIcon("image/boom/bomb.bang0.png"));
+        this.setAttackDamage(20);
         return this;
     }
 
 
     private int i = 0;
     private long localTime = 0;
+
     @Override
     protected void updateImage(long gameTime) {
-        if(gameTime > localTime + 3){
+        if (gameTime > localTime + 3) {
             localTime = gameTime;
 
             String url = String.valueOf(GameLoader.imageMap.get("boom"));
@@ -68,7 +70,7 @@ public class PlaneBulletDestroyEffect extends ElementObj{
             this.setHeight(icon.getIconHeight());
             // 更新图片
             this.setImageIcon(icon);
-            if(i == imageList.size() - 1){
+            if (i == imageList.size() - 1) {
                 this.setAlive(false);
             }
         }
