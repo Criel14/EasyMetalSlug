@@ -21,7 +21,7 @@ public class PlaneBullet extends ElementObj{
 
     @Override
     public void showElement(Graphics g) {
-        g.drawImage(this.getImageIcon().getImage(), this.getX(), this.getY(), this.getWidth(), this.getHeight(), null);
+        g.drawImage(this.getImageIcon().getImage(), (this.getX() - getMap().newX) * 2, this.getY(), this.getWidth(), this.getHeight(), null);
     }
 
 //    str的格式是：x,y

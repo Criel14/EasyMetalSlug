@@ -25,7 +25,7 @@ public class Player extends ElementObj {
     private boolean isMovingRight = true;
 
     // 移动速度
-    private int moveSpeed = 6;
+    private int moveSpeed = 3;
 
     // 跳跃相关变量
     private boolean isJumping = false;
@@ -75,7 +75,6 @@ public class Player extends ElementObj {
     // 重写显示方法
     @Override
     public void showElement(Graphics g) {
-        // 测试显示图片
         g.drawImage(this.getImageIcon().getImage(), (this.getX() - getMap().newX) * 2, this.getY(), this.getWidth(), this.getHeight(), null);
     }
 
@@ -232,7 +231,15 @@ public class Player extends ElementObj {
         // 添加子弹
         if (isShooting) {
             // 发射子弹逻辑
+            ElementObj obj = GameLoader.getObject("gunBullet");
+            int x = this.getX();
+            int y = this.getY();
+            int isMovingRight = 0;
+            if (this.isMovingRight) isMovingRight = 1;
+            String data = Integer.toString(x) + "," + Integer.toString(y) + ",gunBullet," + Integer.toString(isMovingRight);
 
+            obj.createElement(data);
+            ElementManager.getManager().addElement(GameElement.PLAYER_BULLET, obj);
         }
     }
 }

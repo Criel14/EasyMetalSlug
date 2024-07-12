@@ -11,10 +11,10 @@ public class Plane extends ElementObj{
     // 飞机的生存时间
     private int lifeTime = 200;
     // 飞机的飞行速度
-    private int moveSpeed = 8;
+    private int moveSpeed = 4;
     @Override
     public void showElement(Graphics g) {
-        g.drawImage(this.getImageIcon().getImage(), this.getX(), this.getY(), this.getWidth(), this.getHeight(), null);
+        g.drawImage(this.getImageIcon().getImage(), (this.getX() - getMap().newX) * 2, this.getY(), this.getWidth(), this.getHeight(), null);
     }
 
     @Override

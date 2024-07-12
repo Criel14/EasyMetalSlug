@@ -16,7 +16,7 @@ public class PlaneBulletDestroyEffect extends ElementObj{
 
     @Override
     public void showElement(Graphics g) {
-        g.drawImage(this.getImageIcon().getImage(),this.getX()-40,this.getY()-80,this.getWidth(), this.getHeight(),null);
+        g.drawImage(this.getImageIcon().getImage(),(this.getX() - getMap().newX) * 2 -40,this.getY()-80,this.getWidth(), this.getHeight(),null);
     }
 
 
