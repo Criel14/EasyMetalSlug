@@ -28,7 +28,7 @@ public class Player extends ElementObj {
 
     // 跳跃相关变量
     private boolean isJumping = false;
-    private int jumpSpeed = 10;
+    private int jumpSpeed = 20;
     private int gravity = 1;
     private int jumpHeight = 20;
     private int initialY;
@@ -38,7 +38,7 @@ public class Player extends ElementObj {
 
     // 状态（跑、跳、站立等）
     private String upperStatus = "attackhandgun";
-    private String lowerStatus = "run";
+    private String lowerStatus = "stand";
 
     // 是否在发射
     private boolean isShooting = false;
@@ -163,11 +163,13 @@ public class Player extends ElementObj {
                     this.isMoving = true;
                     this.isMovingRight = false;
                     this.direction = "left";
+                    lowerStatus = "run";
                     break;
                 case KeyboardCode.D:
                     this.isMoving = true;
                     this.isMovingRight = true;
                     this.direction = "right";
+                    lowerStatus = "run";
                     break;
                 case KeyboardCode.SPACE:
                     if (!isJumping) {
@@ -177,6 +179,7 @@ public class Player extends ElementObj {
                     break;
                 case KeyboardCode.J:
                     if (!isShooting && canShoot) {
+                        lowerStatus = "stand";
                         isShooting = true;
                         shootingFrameCounter = 0; // 重置射击动画帧计数器
                         Timer timer = new Timer(bulletInterval, e -> {
@@ -197,6 +200,7 @@ public class Player extends ElementObj {
             }
         } else {
             isMoving = false;
+            lowerStatus = "stand";
         }
     }
 
@@ -226,7 +230,7 @@ public class Player extends ElementObj {
             if (this.getY() >= initialY) {
                 this.setY(initialY);
                 isJumping = false;
-                jumpSpeed = 10; // 重置跳跃速度
+                jumpSpeed = 20; // 重置跳跃速度
                 lowerStatus = "run"; // 恢复跑步状态
             }
         }
