@@ -106,7 +106,7 @@ public class Enemy extends ElementObj {
     }
 
     @Override
-    protected void die(long gameTime) {
+    public void die(long gameTime) {
         status = "die";
         isDying = true;
     }

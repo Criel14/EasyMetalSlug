@@ -1,7 +1,6 @@
 package com.g543.g543game.controller;
 
-import com.g543.g543game.element.BackgroundMap;
-import com.g543.g543game.element.ElementObj;
+import com.g543.g543game.element.*;
 import com.g543.g543game.manager.ElementManager;
 import com.g543.g543game.manager.GameElement;
 import com.g543.g543game.manager.GameLoader;
@@ -137,8 +136,10 @@ public class GameThread extends Thread {
             for (ElementObj elementB : listB) {
                 if (elementA.isCollided(elementB)) {
                     // 用instanceof 判断类型后执行对应逻辑
-                    elementA.setAlive(false);
-                    elementB.setHp(elementB.getHp() - 30);
+                    if ((elementA instanceof GunBullet || elementA instanceof RPGBullet) && elementB instanceof Enemy) {
+                        elementA.die(gameTime);
+                        elementB.attacked(elementA.getAttackDamage());
+                    }
                     break;
                 }
             }

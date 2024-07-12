@@ -52,6 +52,8 @@ public class Player extends ElementObj {
     // 射击动画帧计数器
     private int shootingFrameCounter = 0;
 
+    //子弹类型(RPGBullet, gunBullet)
+    private String bulletType = "gunBullet";
     // 构造方法
     public Player() {
     }
@@ -195,6 +197,8 @@ public class Player extends ElementObj {
                 case KeyboardCode.K:
                     ElementManager.getManager().addElement(GameElement.PLANE,new Plane().createElement(""));
                     break;
+                case KeyboardCode.L:
+                    switchWeapon("RPG");
                 default:
                     break;
             }
@@ -247,16 +251,26 @@ public class Player extends ElementObj {
     }
 
     private void addBullet() {
-        ElementObj obj = GameLoader.getObject("gunBullet");
+        ElementObj obj = GameLoader.getObject(bulletType);
         int x = this.getX();
         int y = this.getY();
         int isMovingRight = 0;
         if (this.isMovingRight) isMovingRight = 1;
         if (isMovingRight == 1) x += 50;
         y += 15;
-        String data = Integer.toString(x) + "," + Integer.toString(y) + ",gunBullet," + Integer.toString(isMovingRight);
+        String data = Integer.toString(x) + "," + Integer.toString(y) + "," + bulletType + "," + Integer.toString(isMovingRight);
 
         obj.createElement(data);
         ElementManager.getManager().addElement(GameElement.PLAYER_BULLET, obj);
+    }
+
+    private void switchWeapon(String Type) {
+        if (Type.equals("gun")) {
+            bulletType = "gunBullet";
+            upperStatus = "attackhandgun";
+        } else {
+            bulletType = "RPGBullet";
+            upperStatus = "attackhandcannon";
+        }
     }
 }

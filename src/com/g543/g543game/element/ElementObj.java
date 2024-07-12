@@ -29,6 +29,16 @@ public abstract class ElementObj {
     // 地图类使用，0为地图不动，1为地图向左运动，2为地图向右运动
     public int changeWay = 0;
 
+    private int attackDamage = 0;
+
+    public int getAttackDamage() {
+        return attackDamage;
+    }
+
+    public void setAttackDamage(int attackDamage) {
+        this.attackDamage = attackDamage;
+    }
+
     // getter和setter
     public boolean isAlive() {
         return isAlive;
@@ -137,7 +147,7 @@ public abstract class ElementObj {
         if (hp <= 0) die(gameTime);
     }
 
-    protected void die(long gameTime) {
+    public void die(long gameTime) {
     }
 
     // 这些没有abstract的方法， 子类根据需要选择性继承
@@ -197,10 +207,6 @@ public abstract class ElementObj {
     // 受到攻击，子类可以重写逻辑
     public void attacked(int damage) {
         this.hp -= damage;
-        // 血量为0则设置生存状态为false
-        if (this.hp <= 0) {
-            this.setAlive(false);
-        }
     }
 
     protected BackgroundMap getMap() {
