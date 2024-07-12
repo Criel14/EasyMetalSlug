@@ -292,8 +292,16 @@ public class Player extends ElementObj {
         }
     }
 
+    // 在屏幕左上角显示血条
     @Override
-    public void die(long gameTime) {
-
+    public void showBloodBar(Graphics g) {
+        //如果血量小于0，就不显示
+        if (this.getHp() <= 0) {
+            return;
+        }
+        //设置颜色为红色
+        g.setColor(java.awt.Color.RED);
+        g.drawRect(20, 20, 300, 15);
+        g.fillRect(20, 20, (int) (300 * this.getHp() / this.getMaxHp()), 15);
     }
 }
