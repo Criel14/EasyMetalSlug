@@ -138,7 +138,6 @@ public class GameThread extends Thread {
                     // 敌人被子弹命中
                     if ((elementA instanceof GunBullet || elementA instanceof RPGBullet || elementA instanceof PlaneBullet) && elementB instanceof Enemy) {
                         elementA.die(gameTime);
-                        System.out.println("子弹的伤害是：" + elementA.getAttackDamage());
                         elementB.attacked(elementA.getAttackDamage());
                     }
 
@@ -151,6 +150,7 @@ public class GameThread extends Thread {
                     // 玩家捡起道具
                     if (elementA instanceof Player && elementB instanceof Prop) {
                         System.out.println("get prop!!");
+                        elementA.attacked(-200); // 回血
                         elementB.setAlive(false);
                     }
 
