@@ -22,7 +22,6 @@ public class GunBullet extends ElementObj {
 
     @Override
     public ElementObj createElement(String data) {
-        System.out.println(data);
         String[] split = data.split(",");
         this.setX(Integer.parseInt(split[0]));
         this.setY(Integer.parseInt(split[1]));

@@ -7,7 +7,6 @@ import com.g543.g543game.util.KeyboardCode;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.xml.bind.Element;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -44,8 +43,11 @@ public class Player extends ElementObj {
     // 是否在发射
     private boolean isShooting = false;
 
+    // 是否可以发射
+    private boolean canShoot = true;
+
     // 子弹发射间隔
-    private int bulletInterval = 500;
+    private int bulletInterval = 400;
 
     // 射击动画帧计数器
     private int shootingFrameCounter = 0;
@@ -174,12 +176,17 @@ public class Player extends ElementObj {
                     }
                     break;
                 case KeyboardCode.J:
-                    if (!isShooting) {
+                    if (!isShooting && canShoot) {
                         isShooting = true;
                         shootingFrameCounter = 0; // 重置射击动画帧计数器
-                        Timer timer = new Timer(bulletInterval, e -> isShooting = false);
+                        Timer timer = new Timer(bulletInterval, e -> {
+                            isShooting = false;
+                            canShoot = true; // 重置射击状态
+                        });
+                        canShoot = false; // 禁止连续射击
                         timer.setRepeats(false); // 只执行一次
                         timer.start();
+                        addBullet(); // 发射子弹
                     }
                     break;
                 case KeyboardCode.K:
@@ -229,17 +236,23 @@ public class Player extends ElementObj {
     @Override
     protected void addProp(long gameTime) {
         // 添加子弹
-        if (isShooting) {
+        if (isShooting && canShoot) {
             // 发射子弹逻辑
-            ElementObj obj = GameLoader.getObject("gunBullet");
-            int x = this.getX();
-            int y = this.getY();
-            int isMovingRight = 0;
-            if (this.isMovingRight) isMovingRight = 1;
-            String data = Integer.toString(x) + "," + Integer.toString(y) + ",gunBullet," + Integer.toString(isMovingRight);
-
-            obj.createElement(data);
-            ElementManager.getManager().addElement(GameElement.PLAYER_BULLET, obj);
+            addBullet();
         }
+    }
+
+    private void addBullet() {
+        ElementObj obj = GameLoader.getObject("gunBullet");
+        int x = this.getX();
+        int y = this.getY();
+        int isMovingRight = 0;
+        if (this.isMovingRight) isMovingRight = 1;
+        if (isMovingRight == 1) x += 50;
+        y += 15;
+        String data = Integer.toString(x) + "," + Integer.toString(y) + ",gunBullet," + Integer.toString(isMovingRight);
+
+        obj.createElement(data);
+        ElementManager.getManager().addElement(GameElement.PLAYER_BULLET, obj);
     }
 }
