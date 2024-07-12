@@ -64,8 +64,6 @@ public class GameThread extends Thread {
             elementExecuteModel(all, gameTime);
             // 执行碰撞检测
             elementCollision(all);
-            // 执行地图移动监测
-            mapMove(all);
             // 控制时间流逝
             gameTime++;
             try {
@@ -76,30 +74,6 @@ public class GameThread extends Thread {
         }
     }
 
-    private void mapMove(Map<GameElement, List<ElementObj>> all) {
-        List<ElementObj> backgrounds = all.get(GameElement.BACKGROUND_MAP);
-        List<ElementObj> players = all.get(GameElement.PLAYER);
-        for (ElementObj player : players) {
-//            System.out.println(player.getX());
-            if (player.getX() > GameJFrame.GAME_WIDTH / 3 * 2) {
-                for (ElementObj background : backgrounds) {
-                    if (background.getChangeWay() == 2) {
-                        background.setChange(true);
-                    } else {
-                        background.setChange(false);
-                    }
-                }
-            } else if (player.getX() < GameJFrame.GAME_WIDTH / 3) {
-                for (ElementObj background : backgrounds) {
-                    if (background.getChangeWay() == 1) {
-                        background.setChange(true);
-                    } else {
-                        background.setChange(false);
-                    }
-                }
-            }
-        }
-    }
 
     // 结束场景、资源回收
     private void gameEnd() {
@@ -136,7 +110,7 @@ public class GameThread extends Thread {
                 if (elementA.isCollided(elementB)) {
                     // 用instanceof 判断类型后执行对应逻辑
                     // 敌人被子弹命中
-                    if ((elementA instanceof GunBullet || elementA instanceof RPGBullet || elementA instanceof PlaneBullet) && elementB instanceof Enemy) {
+                    if ((elementA instanceof GunBullet || elementA instanceof RPGBullet || elementA instanceof PlaneBullet) && (elementB instanceof Enemy || elementB instanceof Hostage))  {
                         elementA.die(gameTime);
                         elementB.attacked(elementA.getAttackDamage());
                     }
@@ -169,12 +143,14 @@ public class GameThread extends Thread {
         List<ElementObj> enemyBullet = all.get(GameElement.ENEMY_BULLET);
         List<ElementObj> prop = all.get(GameElement.PROP);
         List<ElementObj> planeBullet = all.get(GameElement.PLANE_BULLET);
+        List<ElementObj> hostage = all.get(GameElement.HOSTAGE);
         // 执行碰撞检测
         checkCollision(playerBullet, enemy);
         checkCollision(enemyBullet, player);
         checkCollision(player, prop);
         checkCollision(planeBullet, enemy);
-
+        checkCollision(playerBullet, hostage);
+        checkCollision(planeBullet, hostage);
     }
 
 }

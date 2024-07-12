@@ -231,14 +231,14 @@ public class Player extends ElementObj {
     public void move(long gameTime) {
         if (this.isMoving) {
             BackgroundMap map = getMap();
-            if (this.isMovingRight && this.getX() <= 1400) {
-                if (this.getX() - map.newX >= 550)
+            if (this.isMovingRight && this.getX() <= 1350) {
+                if (this.getX() - map.newX >= 500)
                 {
                     map.newX += moveSpeed;
                 }
                 this.setX(this.getX() + moveSpeed);
-            } else if (!this.isMovingRight && this.getX() >= 50) {
-                if (this.getX() - map.newX <= 25){
+            } else if (!this.isMovingRight && this.getX() >= 75) {
+                if (this.getX() - map.newX <= 75){
                     map.newX -= moveSpeed;
                 }
                 this.setX(this.getX() - moveSpeed);

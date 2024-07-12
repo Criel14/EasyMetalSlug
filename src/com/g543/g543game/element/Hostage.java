@@ -19,9 +19,14 @@ public class Hostage extends ElementObj{
     //状态：stand，die
     private String status = "stand";
 
+    private int moveSpeed = 4;
+    private boolean isDying = false;
+    private int dyingFrameCounter = 0;
+
     @Override
     public void showElement(Graphics g) {
         g.drawImage(this.getImageIcon().getImage(),(this.getX() - getMap().newX) * 2,this.getY(),this.getWidth(),this.getHeight(),null);
+        showBloodBar(g);
     }
     @Override
     public ElementObj createElement(String str){
@@ -50,10 +55,32 @@ public class Hostage extends ElementObj{
         }
 
         ImageIcon icon = new ImageIcon(imageList.get((int) (gameTime / 20 % imageList.size())).toString());
+
+        if (isDying) {
+            icon = new ImageIcon(imageList.get((int) (dyingFrameCounter / 8 % imageList.size())).toString());
+            if(dyingFrameCounter >= 7 * 8 && dyingFrameCounter <= 13 * 8) this.setX(this.getX() - 1);
+            else if(dyingFrameCounter >= 19 * 8 && dyingFrameCounter <= 25 * 8) this.setX(this.getX() - 2);
+            dyingFrameCounter++;
+
+            if(dyingFrameCounter / 8 == imageList.size() && this.getX() - getMap().newX > 0) dyingFrameCounter -= 6 * 8;
+            if (dyingFrameCounter / 8 == imageList.size()) {
+                this.setAlive(false);
+//                System.out.println("hostage die");
+            }
+        }
+
         this.setWidth(icon.getIconWidth());
         this.setHeight(icon.getIconHeight());
 
         // 更新图片
         this.setImageIcon(icon);
     }
+
+    @Override
+    public void die(long gameTime) {
+        status = "die";
+        isDying = true;
+    }
+
+
 }
