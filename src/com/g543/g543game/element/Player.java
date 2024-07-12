@@ -72,6 +72,8 @@ public class Player extends ElementObj {
         this.setWidth(100);
         this.setHeight(93);
         this.setImageIcon(icon);
+        setHp(500);
+        setMaxHp(500);
         initialY = this.getY(); // 初始化初始Y坐标
         return this;
     }
@@ -80,6 +82,7 @@ public class Player extends ElementObj {
     @Override
     public void showElement(Graphics g) {
         g.drawImage(this.getImageIcon().getImage(), (this.getX() - getMap().newX) * 2, this.getY(), this.getWidth(), this.getHeight(), null);
+        showBloodBar(g);
     }
 
     @Override
@@ -198,7 +201,8 @@ public class Player extends ElementObj {
                     ElementManager.getManager().addElement(GameElement.PLANE,new Plane().createElement(""));
                     break;
                 case KeyboardCode.L:
-                    switchWeapon("RPG");
+                    if (bulletType.equals("gunBullet")) switchWeapon("RPG");
+                    else switchWeapon("gun");
                 default:
                     break;
             }
@@ -272,5 +276,10 @@ public class Player extends ElementObj {
             bulletType = "RPGBullet";
             upperStatus = "attackhandcannon";
         }
+    }
+
+    @Override
+    public void die(long gameTime) {
+
     }
 }

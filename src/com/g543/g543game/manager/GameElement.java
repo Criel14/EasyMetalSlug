@@ -19,5 +19,7 @@ public enum GameElement {
     PLANE_BULLET,
     // 已销毁/已死亡的元素产生的效果，例如爆炸特效
     DESTROYED_ELEMENT_EFFECT,
+    //道具
+    PROP
     // 按需要添加...
 }

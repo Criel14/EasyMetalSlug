@@ -49,6 +49,8 @@ public class GameThread extends Thread {
         GameLoader.loadHostage();
         // 加载地图
         GameLoader.loadBackground();
+        //加载道具
+        GameLoader.loadProp();
         // 加载其他元素
 
     }
@@ -140,6 +142,16 @@ public class GameThread extends Thread {
                         elementA.die(gameTime);
                         elementB.attacked(elementA.getAttackDamage());
                     }
+
+                    if ((elementA instanceof GunBullet || elementA instanceof RPGBullet) && elementB instanceof Player) {
+                        elementA.die(gameTime);
+                        elementB.attacked(elementA.getAttackDamage());
+                    }
+
+                    if (elementA instanceof Player && elementB instanceof Prop) {
+                        System.out.println("get prop!!");
+                        elementB.setAlive(false);
+                    }
                     break;
                 }
             }
@@ -152,9 +164,12 @@ public class GameThread extends Thread {
         List<ElementObj> player = all.get(GameElement.PLAYER);
         List<ElementObj> playerBullet = all.get(GameElement.PLAYER_BULLET);
         List<ElementObj> enemy = all.get(GameElement.ENEMY);
-
+        List<ElementObj> enemyBullet = all.get(GameElement.ENEMY_BULLET);
+        List<ElementObj> prop = all.get(GameElement.PROP);
         // 执行碰撞检测
         checkCollision(playerBullet, enemy); // 用法示例
+        checkCollision(enemyBullet, player);
+        checkCollision(player, prop);
 
     }
 

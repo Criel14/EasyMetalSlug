@@ -24,6 +24,7 @@ public abstract class ElementObj {
     private boolean isAlive = true;
     // 血量（默认值为100）
     private int hp = 100;
+    private int maxHp = 100;
     //地图类使用，根据玩家在地图上的相对位置决定是否移动地图，例如地图左右侧的1/3是允许地图移动的范围
     public Boolean isChange = false;
     // 地图类使用，0为地图不动，1为地图向左运动，2为地图向右运动
@@ -219,6 +220,14 @@ public abstract class ElementObj {
         return map;
     }
 
+    public int getMaxHp() {
+        return maxHp;
+    }
+
+    public void setMaxHp(int maxHp) {
+        this.maxHp = maxHp;
+    }
+
     public void showBloodBar(Graphics g) { //显示血条
         //如果为子弹，就不显示
         if (this instanceof GunBullet) {
@@ -231,6 +240,6 @@ public abstract class ElementObj {
         //设置颜色为红色
         g.setColor(java.awt.Color.RED);
         g.drawRect((this.getX() - getMap().newX) * 2, this.getY() - 10, 100, 5);
-        g.fillRect((this.getX() - getMap().newX) * 2, this.getY() - 10, (int) (100 * this.getHp() / 100), 5);
+        g.fillRect((this.getX() - getMap().newX) * 2, this.getY() - 10, (int) (100 * this.getHp() / maxHp), 5);
     }
 }

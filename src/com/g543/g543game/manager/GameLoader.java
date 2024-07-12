@@ -85,13 +85,22 @@ public class GameLoader {
         elementManager.addElement(GameElement.BACKGROUND_MAP, background);
     }
 
-    //加载人资
+    //加载人质
     public static void loadHostage(){
         loadObject();
         String hostageData = "500,500,test_hostage_image";
         ElementObj obj = getObject("hostage");
         ElementObj hostage = obj.createElement(hostageData);
         elementManager.addElement(GameElement.HOSTAGE, hostage);
+    }
+
+    //加载道具
+    public static void loadProp(){
+        loadObject();
+        String hostageData = "300,550,prop_apple";
+        ElementObj obj = getObject("prop");
+        ElementObj prop = obj.createElement(hostageData);
+        elementManager.addElement(GameElement.PROP, prop);
     }
 
     // 加载图片方法
