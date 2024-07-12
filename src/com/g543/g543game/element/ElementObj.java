@@ -133,6 +133,11 @@ public abstract class ElementObj {
         stand(gameTime);
         // 状态切换
         stateSwitch(gameTime);
+
+        if (hp <= 0) die(gameTime);
+    }
+
+    protected void die(long gameTime) {
     }
 
     // 这些没有abstract的方法， 子类根据需要选择性继承

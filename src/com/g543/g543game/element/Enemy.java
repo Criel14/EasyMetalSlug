@@ -1,7 +1,5 @@
 package com.g543.g543game.element;
 
-import com.g543.g543game.manager.ElementManager;
-import com.g543.g543game.manager.GameElement;
 import com.g543.g543game.manager.GameLoader;
 
 import javax.swing.*;
@@ -22,6 +20,11 @@ public class Enemy extends ElementObj {
     // 状态：attack，run，stand，die
     private String status = "stand";
 
+    //正在播放死亡动画
+    private boolean isDying = false;
+
+    // 死亡动画帧计数器
+    private int dyingFrameCounter = 0;
 
     public Enemy() {
     }
@@ -65,6 +68,13 @@ public class Enemy extends ElementObj {
         }
 
         ImageIcon icon = new ImageIcon(imageList.get((int) (gameTime / 20 % imageList.size())).toString());
+        if (isDying) {
+            icon = new ImageIcon(imageList.get((int) (dyingFrameCounter / 15 % imageList.size())).toString());
+            dyingFrameCounter ++;
+            if (dyingFrameCounter % 15 == 0) setY(getY() + 8);
+            if (dyingFrameCounter / 15 == imageList.size()) this.setAlive(false);
+        }
+
         this.setWidth(icon.getIconWidth());
         this.setHeight(icon.getIconHeight());
 
@@ -76,5 +86,11 @@ public class Enemy extends ElementObj {
     // get和set方法
     public void setEnemyType(String enemyType) {
         this.enemyType = enemyType;
+    }
+
+    @Override
+    protected void die(long gameTime) {
+        status = "die";
+        isDying = true;
     }
 }
