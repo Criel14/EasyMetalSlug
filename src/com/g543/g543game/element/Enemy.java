@@ -33,6 +33,7 @@ public class Enemy extends ElementObj {
         } catch (Exception e){
             System.out.println("Enemy showElement error" + this.getImageIcon());
         }
+        showBloodBar(g);
     }
 
     // data格式：X坐标，Y坐标，种类（EnemyGun或EnemyRPG）

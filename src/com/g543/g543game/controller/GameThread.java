@@ -137,7 +137,8 @@ public class GameThread extends Thread {
             for (ElementObj elementB : listB) {
                 if (elementA.isCollided(elementB)) {
                     // 用instanceof 判断类型后执行对应逻辑
-
+                    elementA.setAlive(false);
+                    elementB.setHp(elementB.getHp() - 30);
                     break;
                 }
             }
@@ -148,9 +149,11 @@ public class GameThread extends Thread {
     private void elementCollision(Map<GameElement, List<ElementObj>> all) {
         // 获取元素集合
         List<ElementObj> player = all.get(GameElement.PLAYER);
+        List<ElementObj> playerBullet = all.get(GameElement.PLAYER_BULLET);
+        List<ElementObj> enemy = all.get(GameElement.ENEMY);
 
         // 执行碰撞检测
-        checkCollision(player, player); // 用法示例
+        checkCollision(playerBullet, enemy); // 用法示例
 
     }
 
