@@ -1,13 +1,12 @@
 package com.g543.g543game.element;
 
-import com.g543.g543game.manager.GameElement;
 import com.g543.g543game.manager.GameLoader;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
 
-public class GunBullet extends ElementObj {
+public class EnemyBullet extends ElementObj {
 
     // 移动速度
     private int moveSpeed = 6;
@@ -30,7 +29,7 @@ public class GunBullet extends ElementObj {
         this.setHeight(icon.getIconHeight());
         this.setImageIcon(icon);
         isMovingRight = Objects.equals(split[3], "1");
-        setAttackDamage(30);
+        setAttackDamage(Integer.parseInt(split[4]));
         return this;
     }
 

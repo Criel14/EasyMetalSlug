@@ -18,8 +18,8 @@ import static java.lang.Math.abs;
 
 public class Enemy extends ElementObj {
 
-    // 敌人种类：EnemyGun,EnemyRPG
-    private String enemyType = "EnemyGun";
+    // 敌人种类：enemyGun,enemyRPG
+    private String enemyType = "enemyGun";
     // 方向：right,left
     private String direction = "left";
     // 状态：attack，run，stand，die
@@ -53,6 +53,11 @@ public class Enemy extends ElementObj {
     public Enemy() {
     }
 
+    // 设置攻击间隔
+    public void setAttackInterval(long attackInterval) {
+        this.attackInterval = attackInterval;
+    }
+
     @Override
     public void showElement(Graphics g) {
         try {
@@ -71,6 +76,10 @@ public class Enemy extends ElementObj {
         this.setEnemyType(split[2]);
         this.setWidth(100);
         this.setHeight(93);
+        // RPG类型的攻击间隔慢
+        if ("enemyRPG".equals(this.enemyType)) {
+            this.setAttackInterval(2000);
+        }
 
         return this;
     }
@@ -147,8 +156,7 @@ public class Enemy extends ElementObj {
         }
 
         // 移动逻辑
-        if (abs(playerX - this.getX()) < 200)
-        {
+        if (abs(playerX - this.getX()) < 200) {
             if (!status.equals("stand")) status = "stand";
             return;
         }
@@ -167,15 +175,24 @@ public class Enemy extends ElementObj {
 
     private void shoot() {
         // 发射子弹逻辑
-        ElementObj obj = GameLoader.getObject("gunBullet");
+        ElementObj obj = GameLoader.getObject("enemyBullet");
+        // 子弹类型
+        String bulletType = "gunBullet";
+        // 子弹伤害
+        int bulletDamage = 30;
+        // 判断类型
+        if ("enemyRPG".equals(this.enemyType)) {
+            bulletType = "RPGBullet_" + this.direction;
+            bulletDamage = 60;
+        }
+
         int x = this.getX();
         int y = this.getY();
         int isMovingRight = 0;
         if (direction.equals("right")) isMovingRight = 1;
         if (isMovingRight == 1) x += 50;
         y += 15;
-        String data = Integer.toString(x) + "," + Integer.toString(y) + ",gunBullet," + Integer.toString(isMovingRight);
-
+        String data = x + "," + y + "," + bulletType + "," + isMovingRight + "," + bulletDamage;
         obj.createElement(data);
         ElementManager.getManager().addElement(GameElement.ENEMY_BULLET, obj);
     }

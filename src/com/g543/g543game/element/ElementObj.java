@@ -230,7 +230,7 @@ public abstract class ElementObj {
 
     public void showBloodBar(Graphics g) { //显示血条
         //如果为子弹，就不显示
-        if (this instanceof GunBullet) {
+        if (this instanceof EnemyBullet) {
             return;
         }
         //如果血量小于0，就不显示

@@ -4,7 +4,6 @@ import com.g543.g543game.element.*;
 import com.g543.g543game.manager.ElementManager;
 import com.g543.g543game.manager.GameElement;
 import com.g543.g543game.manager.GameLoader;
-import com.g543.g543game.show.GameJFrame;
 
 import java.util.*;
 
@@ -114,13 +113,13 @@ public class GameThread extends Thread {
                 if (elementA.isCollided(elementB)) {
                     // 用instanceof 判断类型后执行对应逻辑
                     // 敌人被子弹命中
-                    if ((elementA instanceof GunBullet || elementA instanceof RPGBullet || elementA instanceof PlaneBullet) && (elementB instanceof Enemy || elementB instanceof Hostage))  {
+                    if ((elementA instanceof EnemyBullet || elementA instanceof RPGBullet || elementA instanceof PlaneBullet) && (elementB instanceof Enemy || elementB instanceof Hostage))  {
                         elementA.die(gameTime);
                         elementB.attacked(elementA.getAttackDamage());
                     }
 
                     // 玩家被子弹命中
-                    if ((elementA instanceof GunBullet || elementA instanceof RPGBullet) && elementB instanceof Player) {
+                    if ((elementA instanceof EnemyBullet || elementA instanceof RPGBullet) && elementB instanceof Player) {
                         elementA.die(gameTime);
                         elementB.attacked(elementA.getAttackDamage());
                     }
