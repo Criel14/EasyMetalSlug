@@ -131,9 +131,9 @@ public class GameThread extends Thread {
 
                     // 玩家捡起道具
                     if (elementA instanceof Player && elementB instanceof Prop) {
-                        System.out.println("get prop!!");
                         elementA.attacked(-200); // 回血
                         elementB.setAlive(false);
+                        soundManager.playSound("get_prop");
                     }
 
                     break;

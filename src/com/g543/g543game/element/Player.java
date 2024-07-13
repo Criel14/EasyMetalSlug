@@ -3,6 +3,7 @@ package com.g543.g543game.element;
 import com.g543.g543game.manager.ElementManager;
 import com.g543.g543game.manager.GameElement;
 import com.g543.g543game.manager.GameLoader;
+import com.g543.g543game.manager.SoundManager;
 import com.g543.g543game.util.KeyboardCode;
 
 import javax.imageio.ImageIO;
@@ -59,6 +60,9 @@ public class Player extends ElementObj {
 
     //子弹类型(gunBullet, RPGBullet_left, RPGBullet_right)
     private String bulletType = "gunBullet";
+
+    private SoundManager soundManager = SoundManager.getInstance();
+
 
     // 构造方法
     public Player() {
@@ -283,11 +287,13 @@ public class Player extends ElementObj {
             obj = GameLoader.getObject("gunBullet");
             bulletDanage = 30;
             data = x + "," + y + "," + bulletType + "," + isMovingRight + "," + bulletDanage;
+            soundManager.playSound("gun_shoot");
         }
         else{
             obj = GameLoader.getObject("RPGBullet");
             bulletDanage = 50;
             data = x + "," + y + "," + bulletType + "," + isMovingRight ;
+            soundManager.playSound("rpg_shoot");
         }
 
         obj.createElement(data);

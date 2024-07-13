@@ -3,6 +3,7 @@ package com.g543.g543game.element;
 import com.g543.g543game.manager.ElementManager;
 import com.g543.g543game.manager.GameElement;
 import com.g543.g543game.manager.GameLoader;
+import com.g543.g543game.manager.SoundManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +19,9 @@ public class PlaneBullet extends ElementObj{
     private int lifeTime = 130;
     // 子弹的飞行速度
     private int moveSpeed = 4;
+
+    private SoundManager soundManager = SoundManager.getInstance();
+
 
     @Override
     public void showElement(Graphics g) {
@@ -69,6 +73,7 @@ public class PlaneBullet extends ElementObj{
 
     @Override
     public void destroy(long gameTime) {
+        soundManager.playSound("boom");
         ElementManager.getManager().addElement(GameElement.DESTROYED_ELEMENT_EFFECT,
                 new PlaneBulletDestroyedEffect().createElement(this.getX() + "," + this.getY()));
     }

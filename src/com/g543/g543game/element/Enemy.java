@@ -210,8 +210,11 @@ public class Enemy extends ElementObj {
         if (isMovingRight == 1) x += 50;
         y += 15;
         String data = x + "," + y + "," + bulletType + "," + isMovingRight + "," + bulletDamage;
-        if(bulletType.equals("RPGBullet")) {
+        if (bulletType.equals("RPGBullet")) {
             obj = GameLoader.getObject(bulletType);
+            soundManager.playSound("rpg_shoot");
+        } else {
+            soundManager.playSound("enemy_gun_shoot");
         }
         obj.createElement(data);
         ElementManager.getManager().addElement(GameElement.ENEMY_BULLET, obj);
