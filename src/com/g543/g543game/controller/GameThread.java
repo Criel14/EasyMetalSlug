@@ -12,10 +12,14 @@ import java.util.*;
 public class GameThread extends Thread {
     private ElementManager elementManager;
 
+    // 关卡
+    private int gameLevel = 1;
+
     // 游戏时间：实际上是while循环计数，可以看成帧
     private long gameTime = 0L;
 
-    public GameThread() {
+    public GameThread(int gameLevel) {
+        this.gameLevel = gameLevel;
         elementManager = ElementManager.getManager();
     }
 
@@ -23,7 +27,7 @@ public class GameThread extends Thread {
     public void run() {
         while (true) { // true可以换成变量来控制
             // 加载
-            gameLoad();
+            gameLoad(gameLevel);
             // 进行
             gameRun();
             // 结束当前场景，释放资源
@@ -38,13 +42,13 @@ public class GameThread extends Thread {
     }
 
     // 游戏加载
-    private void gameLoad() {
+    private void gameLoad(int gameLevel) {
         // 加载图片
         GameLoader.loadImage();
         // 加载玩家
         GameLoader.loadPlayer();
         // 加载敌人
-        GameLoader.loadEnemy();
+        GameLoader.loadEnemy(gameLevel);
         // 加载人资
         GameLoader.loadHostage();
         // 加载地图

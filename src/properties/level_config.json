@@ -1,0 +1,42 @@
+{
+  "levels": [
+    {
+      "level": 1,
+      "background": "background1.png",
+      "enemies": [
+        {"x": 400, "y": 500, "type": "enemyGun"},
+        {"x": 200, "y": 500, "type": "enemyRPG"}
+      ]
+    },
+    {
+      "level": 2,
+      "background": "background2.png",
+      "enemies": [
+        {"x": 250, "y": 500, "type": "enemyGun"},
+        {"x": 450, "y": 500, "type": "enemyGun"},
+        {"x": 350, "y": 500, "type": "enemyRPG"}
+      ]
+    },
+    {
+      "level": 3,
+      "background": "background3.png",
+      "enemies": [
+        {"x": 200, "y": 500, "type": "enemyGun"},
+        {"x": 300, "y": 500, "type": "enemyRPG"},
+        {"x": 300, "y": 500, "type": "enemyGun"},
+        {"x": 400, "y": 500, "type": "enemyRPG"}
+      ]
+    },
+    {
+      "level": 4,
+      "background": "background4.png",
+      "enemies": [
+        {"x": 250, "y": 500, "type": "enemyGun"},
+        {"x": 350, "y": 500, "type": "enemyGun"},
+        {"x": 450, "y": 500, "type": "enemyRPG"},
+        {"x": 350, "y": 500, "type": "enemyGun"},
+        {"x": 550, "y": 500, "type": "enemyRPG"}
+      ]
+    }
+  ]
+}

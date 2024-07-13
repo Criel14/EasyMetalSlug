@@ -89,7 +89,10 @@ public class Player extends ElementObj {
     // 重写显示方法
     @Override
     public void showElement(Graphics g) {
-        g.drawImage(this.getImageIcon().getImage(), (this.getX() - getMap().newX) * 2, this.getY(), this.getWidth(), this.getHeight(), null);
+        try {
+            g.drawImage(this.getImageIcon().getImage(), (this.getX() - getMap().newX) * 2, this.getY(), this.getWidth(), this.getHeight(), null);
+        } catch (Exception ignored) {
+        }
         showBloodBar(g);
     }
 

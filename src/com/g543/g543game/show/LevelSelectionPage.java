@@ -1,5 +1,7 @@
 package com.g543.g543game.show;
 
+import com.g543.g543game.controller.GameThread;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -63,7 +65,13 @@ class LevelSelectionPage extends JFrame {
         public void actionPerformed(ActionEvent e) {
             // 在此处添加进入相应关卡的逻辑
             System.out.println("进入关卡 " + level);
+
             GameJFrame gameJFrame = GameJFrame.getInstance();
+
+            // 实例化主线程，并注入GameJFrame
+            GameThread gameThread = new GameThread(level);
+            gameJFrame.setGameThread(gameThread);
+
             gameJFrame.start(); // 启动游戏主窗口
             LevelSelectionPage.this.dispose();
         }

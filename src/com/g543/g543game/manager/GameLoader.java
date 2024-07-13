@@ -5,7 +5,12 @@ import com.g543.g543game.element.ElementObj;
 import javax.swing.*;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 // 资源加载器
 public class GameLoader {
@@ -67,14 +72,52 @@ public class GameLoader {
     }
 
     // 加载敌人
-    public static void loadEnemy() {
+    // 读取level_config配置文件
+    public static void loadEnemy(int gameLevel) {
         loadObject();
-        ElementObj obj1 = getObject("enemy");
-        ElementObj obj2 = getObject("enemy");
-        ElementObj enemy1 = obj1.createElement("700,500,enemyGun");
-        ElementObj enemy2 = obj2.createElement("400,500,enemyGun");
-        elementManager.addElement(GameElement.ENEMY, enemy1);
-        elementManager.addElement(GameElement.ENEMY, enemy2);
+        // 读取json文件
+        try {
+            // 获取文件路径
+            String propertiesUrl = "properties/level_config.json";
+            // 用类加载器获取文件输入流
+            ClassLoader classLoader = GameLoader.class.getClassLoader();
+            InputStream inputStream = classLoader.getResourceAsStream(propertiesUrl);
+
+            // 读取输入流中的内容
+            String content;
+            try (Scanner scanner = new Scanner(inputStream, StandardCharsets.UTF_8.name())) {
+                content = scanner.useDelimiter("\\A").next();
+            }
+
+            // 解析JSON内容
+            JSONObject jsonObj = new JSONObject(content);
+            JSONArray levels = jsonObj.getJSONArray("levels");
+
+            for (int i = 0; i < levels.length(); i++) {
+                JSONObject level = levels.getJSONObject(i);
+                if (level.getInt("level") == gameLevel) {
+                    // 设置背景图片
+//                    String background = level.getString("background");
+//                    setGameBackground(background);
+
+                    JSONArray enemies = level.getJSONArray("enemies");
+                    for (int j = 0; j < enemies.length(); j++) {
+                        JSONObject enemy = enemies.getJSONObject(j);
+                        int x = enemy.getInt("x");
+                        int y = enemy.getInt("y");
+                        String type = enemy.getString("type");
+
+                        ElementObj obj = getObject("enemy");
+                        ElementObj enemyObj = obj.createElement(x + "," + y + "," + type);
+
+                        elementManager.addElement(GameElement.ENEMY, enemyObj);
+                    }
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

@@ -11,10 +11,7 @@ public class GameStart {
     public static <GameFrame> void main(String[] args) {
         GameJFrame gameJFrame = GameJFrame.getInstance();
 
-        // 实例化主线程，并注入GameJFrame
-        GameThread gameThread = new GameThread();
-        gameJFrame.setGameThread(gameThread);
-
+        // 实例化主线程写在了LevelSelectionPage里
         // 实例化面板，并注入GameJFrame
         GameMainJPanel gameMainJPanel = new GameMainJPanel();
         gameJFrame.setjPanel(gameMainJPanel);
