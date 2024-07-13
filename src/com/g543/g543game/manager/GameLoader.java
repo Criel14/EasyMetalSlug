@@ -6,9 +6,8 @@ import javax.swing.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -22,6 +21,8 @@ public class GameLoader {
     private static Properties properties = new Properties();
     // 对象集合
     private static Map<String, Class<?>> objectMap = new HashMap<>();
+    // 背景图片路径
+    private static String backgroundName = "";
 
     // 加载对象
     public static void loadObject() {
@@ -97,8 +98,7 @@ public class GameLoader {
                 JSONObject level = levels.getJSONObject(i);
                 if (level.getInt("level") == gameLevel) {
                     // 设置背景图片
-//                    String background = level.getString("background");
-//                    setGameBackground(background);
+                    backgroundName = level.getString("background");
 
                     JSONArray enemies = level.getJSONArray("enemies");
                     for (int j = 0; j < enemies.length(); j++) {
@@ -123,15 +123,17 @@ public class GameLoader {
 
     //加载地图
     public static void loadBackground() {
+        System.out.println("加载背景" + backgroundName);
+
         loadObject();
-        String BackgroundData = "0,0,background";
+        String BackgroundData = "0,0," + backgroundName;
         ElementObj obj = getObject("backgroundMap");
         ElementObj background = obj.createElement(BackgroundData);
         elementManager.addElement(GameElement.BACKGROUND_MAP, background);
     }
 
     //加载人质
-    public static void loadHostage(){
+    public static void loadHostage() {
         loadObject();
         String hostageData = "500,500,test_hostage_image";
         ElementObj obj = getObject("hostage");
@@ -140,7 +142,7 @@ public class GameLoader {
     }
 
     //加载道具
-    public static void loadProp(){
+    public static void loadProp() {
         loadObject();
         String hostageData = "300,550,prop_apple";
         ElementObj obj = getObject("prop");
