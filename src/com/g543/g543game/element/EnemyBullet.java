@@ -19,6 +19,7 @@ public class EnemyBullet extends ElementObj {
         g.drawImage(this.getImageIcon().getImage(), (this.getX() - getMap().newX) * 2, this.getY(), this.getWidth(), this.getHeight(), null);
     }
 
+
     @Override
     public ElementObj createElement(String data) {
         String[] split = data.split(",");

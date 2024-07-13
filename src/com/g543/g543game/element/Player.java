@@ -57,10 +57,8 @@ public class Player extends ElementObj {
     private int summonFrameCounter = 0;
 
 
-    //子弹类型(RPGBullet, gunBullet)
+    //子弹类型(gunBullet, RPGBullet_left, RPGBullet_right)
     private String bulletType = "gunBullet";
-
-
 
     // 构造方法
     public Player() {
@@ -235,13 +233,12 @@ public class Player extends ElementObj {
         if (this.isMoving) {
             BackgroundMap map = getMap();
             if (this.isMovingRight && this.getX() <= 1350) {
-                if (this.getX() - map.newX >= 500)
-                {
+                if (this.getX() - map.newX >= 500) {
                     map.newX += moveSpeed;
                 }
                 this.setX(this.getX() + moveSpeed);
             } else if (!this.isMovingRight && this.getX() >= 75) {
-                if (this.getX() - map.newX <= 75){
+                if (this.getX() - map.newX <= 75) {
                     map.newX -= moveSpeed;
                 }
                 this.setX(this.getX() - moveSpeed);
@@ -272,14 +269,17 @@ public class Player extends ElementObj {
     }
 
     private void addBullet() {
-        ElementObj obj = GameLoader.getObject(bulletType);
+        ElementObj obj = GameLoader.getObject("enemyBullet");
         int x = this.getX();
         int y = this.getY();
         int isMovingRight = 0;
         if (this.isMovingRight) isMovingRight = 1;
         if (isMovingRight == 1) x += 50;
         y += 15;
-        String data = Integer.toString(x) + "," + Integer.toString(y) + "," + bulletType + "," + Integer.toString(isMovingRight);
+
+        // 伤害
+        int bulletDanage = 30;
+        String data = x + "," + y + "," + bulletType + "," + isMovingRight + "," + bulletDanage;
 
         obj.createElement(data);
         ElementManager.getManager().addElement(GameElement.PLAYER_BULLET, obj);
