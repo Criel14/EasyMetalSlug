@@ -4,12 +4,15 @@ import com.g543.g543game.element.*;
 import com.g543.g543game.manager.ElementManager;
 import com.g543.g543game.manager.GameElement;
 import com.g543.g543game.manager.GameLoader;
+import com.g543.g543game.manager.SoundManager;
 
 import java.util.*;
 
 // 游戏主线程：控制游戏加载、判定、地图切换、资源释放、重新读取等
 public class GameThread extends Thread {
     private ElementManager elementManager;
+
+    private SoundManager soundManager = SoundManager.getInstance();
 
     // 关卡
     private int gameLevel = 1;
@@ -42,6 +45,8 @@ public class GameThread extends Thread {
 
     // 游戏加载
     private void gameLoad(int gameLevel) {
+        // 播放bgm
+        soundManager.playSound("bgm");
         // 加载图片
         GameLoader.loadImage();
         // 加载玩家

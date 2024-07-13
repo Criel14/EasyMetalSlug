@@ -2,6 +2,7 @@ package com.g543.g543game.element;
 
 import com.g543.g543game.manager.ElementManager;
 import com.g543.g543game.manager.GameElement;
+import com.g543.g543game.manager.SoundManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +13,9 @@ public class Plane extends ElementObj{
     private int lifeTime = 200;
     // 飞机的飞行速度
     private int moveSpeed = 4;
+
+    private SoundManager soundManager = SoundManager.getInstance();
+
     @Override
     public void showElement(Graphics g) {
         g.drawImage(this.getImageIcon().getImage(), (this.getX() - getMap().newX) * 2, this.getY(), this.getWidth(), this.getHeight(), null);
@@ -44,6 +48,8 @@ public class Plane extends ElementObj{
             localTime = gameTime;
             ElementObj bullet = new PlaneBullet().createElement(this.toString());
             ElementManager.getManager().addElement(GameElement.PLANE_BULLET, bullet);
+            // 播放音效
+            soundManager.playSound("drop");
         }
     }
 

@@ -7,7 +7,7 @@ import java.awt.event.*;
 public class GameJFrame extends JFrame {
     // 窗体大小
     public static int GAME_WIDTH = 1280;
-    public static int GAME_HEIGHT = 720;
+    public static int GAME_HEIGHT = 700;
 
     // 单例模式的静态实例
     private static GameJFrame instance = null;

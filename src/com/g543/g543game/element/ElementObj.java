@@ -195,7 +195,7 @@ public abstract class ElementObj {
 
     // 获取元素的碰撞体积——矩形对象
     public Rectangle getRectangle() {
-        return new Rectangle(x, y, width/2, height);
+        return new Rectangle(x, y, width / 2, height);
     }
 
     // 碰撞检测（检测对象）
@@ -229,17 +229,18 @@ public abstract class ElementObj {
     }
 
     public void showBloodBar(Graphics g) { //显示血条
-        //如果为子弹，就不显示
+        // 如果为子弹，就不显示
         if (this instanceof Bullet) {
             return;
         }
-        //如果血量小于0，就不显示
+        // 如果血量小于0，就不显示
         if (this.getHp() <= 0) {
             return;
+        } else {
+            // 设置颜色为红色
+            g.setColor(java.awt.Color.RED);
+            g.drawRect((this.getX() - getMap().newX) * 2, this.getY() - 10, 100, 5);
+            g.fillRect((this.getX() - getMap().newX) * 2, this.getY() - 10, (int) (100 * this.getHp() / maxHp), 5);
         }
-        //设置颜色为红色
-        g.setColor(java.awt.Color.RED);
-        g.drawRect((this.getX() - getMap().newX) * 2, this.getY() - 10, 100, 5);
-        g.fillRect((this.getX() - getMap().newX) * 2, this.getY() - 10, (int) (100 * this.getHp() / maxHp), 5);
     }
 }

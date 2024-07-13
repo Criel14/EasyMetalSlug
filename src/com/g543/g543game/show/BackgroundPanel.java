@@ -9,7 +9,7 @@ class BackgroundPanel extends JPanel {
     public BackgroundPanel(String imagePath) {
         // 设置背景图片路径
         backgroundImage = new ImageIcon(imagePath).getImage();
-        System.out.println(imagePath);
+//        System.out.println(imagePath);
     }
 
     @Override

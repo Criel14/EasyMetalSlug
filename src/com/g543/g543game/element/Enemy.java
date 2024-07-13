@@ -3,6 +3,7 @@ package com.g543.g543game.element;
 import com.g543.g543game.manager.ElementManager;
 import com.g543.g543game.manager.GameElement;
 import com.g543.g543game.manager.GameLoader;
+import com.g543.g543game.manager.SoundManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,8 +26,10 @@ public class Enemy extends ElementObj {
     // 状态：attack，run，stand，die
     private String status = "stand";
 
-    //正在播放死亡动画
+    // 正在播放死亡动画
     private boolean isDying = false;
+    // 可以播放死亡音效
+    private boolean canPlayDeathSound = true;
 
     // 死亡动画帧计数器
     private int dyingFrameCounter = 0;
@@ -50,6 +53,9 @@ public class Enemy extends ElementObj {
     private long standDuration = 500; // 站立持续0.5秒
     private long standStartTime = 0; // 记录站立开始的时间
 
+    private SoundManager soundManager = SoundManager.getInstance();
+
+
     public Enemy() {
     }
 
@@ -62,9 +68,10 @@ public class Enemy extends ElementObj {
     public void showElement(Graphics g) {
         try {
             g.drawImage(this.getImageIcon().getImage(), (this.getX() - getMap().newX) * 2, this.getY(), this.getWidth(), this.getHeight(), null);
+            showBloodBar(g);
         } catch (Exception ignored) {
         }
-        showBloodBar(g);
+
     }
 
     // data格式：X坐标，Y坐标，种类（EnemyGun或EnemyRPG）
@@ -100,10 +107,20 @@ public class Enemy extends ElementObj {
 
         ImageIcon icon = new ImageIcon(imageList.get((int) (gameTime / 8 % imageList.size())).toString());
         if (isDying) {
+            // 播放死亡音效
+            if (canPlayDeathSound) {
+                soundManager.playSound("enemy_die");
+                canPlayDeathSound = false;
+            }
+
             icon = new ImageIcon(imageList.get((int) (dyingFrameCounter / 15 % imageList.size())).toString());
             dyingFrameCounter++;
-            if (dyingFrameCounter % 15 == 0) setY(getY() + 8);
-            if (dyingFrameCounter / 15 == imageList.size()) this.setAlive(false);
+            if (dyingFrameCounter % 15 == 0) {
+                setY(getY() + 8);
+            }
+            if (dyingFrameCounter / 15 == imageList.size()) {
+                this.setAlive(false);
+            }
         }
 
         this.setWidth(icon.getIconWidth());
