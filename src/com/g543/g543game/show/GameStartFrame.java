@@ -27,7 +27,7 @@ public class GameStartFrame extends JFrame {
         this.setLayout(null);
 
         // 创建一个背景面板
-        JPanel bgPanel = new BackgroundPanel();
+        JPanel bgPanel = new BackgroundPanel("image/background/cover.jpg");
         bgPanel.setBounds(0, 0, this.getWidth(), this.getHeight());
         // 设置背景面板布局为null
         bgPanel.setLayout(null);
@@ -45,30 +45,15 @@ public class GameStartFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // 获取并启动游戏主窗口
-                GameJFrame gameJFrame = GameJFrame.getInstance();
-                gameJFrame.start(); // 启动游戏主窗口
-                GameStartFrame.this.dispose(); // 关闭启动页面
+//                GameJFrame gameJFrame = GameJFrame.getInstance();
+//                gameJFrame.start(); // 启动游戏主窗口
+//                GameStartFrame.this.dispose(); // 关闭启动页面
+                new LevelSelectionPage();
+                dispose();
             }
         });
 
         // 显示启动页面
         this.setVisible(true);
-    }
-
-    // 自定义背景面板类
-    class BackgroundPanel extends JPanel {
-        private Image backgroundImage;
-
-        public BackgroundPanel() {
-            // 设置背景图片路径
-            backgroundImage = new ImageIcon("image/background/cover.jpg").getImage();
-        }
-
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            // 绘制背景图片
-            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-        }
     }
 }
