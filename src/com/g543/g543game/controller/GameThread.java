@@ -136,12 +136,37 @@ public class GameThread extends Thread {
                         soundManager.playSound("get_prop");
                     }
 
+                    if (elementA instanceof PlaneBulletDestroyedEffect && elementB instanceof Hostage) {
+                        elementB.attacked(elementA.getAttackDamage());
+                        elementA.die(gameTime);
+                    }
+
+                    if (elementA instanceof PlaneBulletDestroyedEffect && elementB instanceof Player) {
+                        elementB.attacked(elementA.getAttackDamage());
+                        elementA.die(gameTime);
+                    }
                     break;
                 }
             }
         }
     }
 
+    public void checkBoomCollision(List<ElementObj> listA, List<ElementObj> listB) {
+        for (ElementObj elementA : listA) {
+            List<ElementObj> listAttacked = new ArrayList<>();
+            for (ElementObj elementB : listB) {
+                if (elementA.isCollided(elementB)) {
+                    listAttacked.add(elementB);
+                }
+            }
+
+            for (ElementObj elementB : listAttacked) {;
+                elementB.attacked(elementA.getAttackDamage());
+            }
+            elementA.die(gameTime);
+        }
+
+    }
     // 对所有元素中必要的元素执行碰撞检测
     private void elementCollision(Map<GameElement, List<ElementObj>> all) {
         // 获取元素集合
@@ -152,6 +177,9 @@ public class GameThread extends Thread {
         List<ElementObj> prop = all.get(GameElement.PROP);
         List<ElementObj> planeBullet = all.get(GameElement.PLANE_BULLET);
         List<ElementObj> hostage = all.get(GameElement.HOSTAGE);
+        List<ElementObj> playerDestroyedEffect = all.get(GameElement.PLAYER_DESTROYED_ELEMENT_EFFECT);
+        List<ElementObj> enemyDestroyedEffect = all.get(GameElement.ENEMY_DESTROYED_ELEMENT_EFFECT);
+
         // 执行碰撞检测
         checkCollision(playerBullet, enemy);
         checkCollision(enemyBullet, player);
@@ -159,6 +187,10 @@ public class GameThread extends Thread {
         checkCollision(planeBullet, enemy);
         checkCollision(playerBullet, hostage);
         checkCollision(planeBullet, hostage);
+        checkCollision(playerDestroyedEffect, hostage);
+        checkBoomCollision(playerDestroyedEffect, enemy);
+        checkCollision(enemyDestroyedEffect, player);
+
     }
 
 }

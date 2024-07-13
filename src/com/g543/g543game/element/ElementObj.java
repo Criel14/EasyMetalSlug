@@ -195,7 +195,7 @@ public abstract class ElementObj {
 
     // 获取元素的碰撞体积——矩形对象
     public Rectangle getRectangle() {
-        return new Rectangle(x, y, width / 2, height);
+        return new Rectangle((x - getMap().newX) * 2, y, width, height);
     }
 
     // 碰撞检测（检测对象）

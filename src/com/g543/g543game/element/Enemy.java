@@ -69,6 +69,7 @@ public class Enemy extends ElementObj {
         try {
             g.drawImage(this.getImageIcon().getImage(), (this.getX() - getMap().newX) * 2, this.getY(), this.getWidth(), this.getHeight(), null);
             showBloodBar(g);
+//            g.drawRect(this.getRectangle().x, this.getRectangle().y, this.getRectangle().width, this.getRectangle().height);
         } catch (Exception ignored) {
         }
 
@@ -212,6 +213,7 @@ public class Enemy extends ElementObj {
         String data = x + "," + y + "," + bulletType + "," + isMovingRight + "," + bulletDamage;
         if (bulletType.equals("RPGBullet")) {
             obj = GameLoader.getObject(bulletType);
+            data += ",0";
             soundManager.playSound("rpg_shoot");
         } else {
             soundManager.playSound("enemy_gun_shoot");

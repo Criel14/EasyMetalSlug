@@ -74,7 +74,7 @@ public class PlaneBullet extends ElementObj{
     @Override
     public void destroy(long gameTime) {
         soundManager.playSound("boom");
-        ElementManager.getManager().addElement(GameElement.DESTROYED_ELEMENT_EFFECT,
+        ElementManager.getManager().addElement(GameElement.PLAYER_DESTROYED_ELEMENT_EFFECT,
                 new PlaneBulletDestroyedEffect().createElement(this.getX() + "," + this.getY()));
     }
 

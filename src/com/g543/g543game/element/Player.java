@@ -292,7 +292,7 @@ public class Player extends ElementObj {
         else{
             obj = GameLoader.getObject("RPGBullet");
             bulletDanage = 50;
-            data = x + "," + y + "," + bulletType + "," + isMovingRight ;
+            data = x + "," + y + "," + bulletType + "," + isMovingRight + ",1" ;
             soundManager.playSound("rpg_shoot");
         }
 

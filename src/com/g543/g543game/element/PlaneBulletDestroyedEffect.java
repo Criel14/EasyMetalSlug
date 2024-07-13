@@ -16,7 +16,8 @@ public class PlaneBulletDestroyedEffect extends ElementObj {
 
     @Override
     public void showElement(Graphics g) {
-        g.drawImage(this.getImageIcon().getImage(), (this.getX() - getMap().newX) * 2 - 40, this.getY() - 80, this.getWidth(), this.getHeight(), null);
+        g.drawImage(this.getImageIcon().getImage(), (this.getX() - getMap().newX) * 2, this.getY() - 80, this.getWidth(), this.getHeight(), null);
+//        g.drawRect(this.getRectangle().x, this.getRectangle().y, this.getRectangle().width, this.getRectangle().height);
     }
 
 
@@ -26,7 +27,7 @@ public class PlaneBulletDestroyedEffect extends ElementObj {
         this.setX(Integer.parseInt(strs[0]));
         this.setY(Integer.parseInt(strs[1]));
         this.setImageIcon(new ImageIcon("image/boom/bomb.bang0.png"));
-        this.setAttackDamage(20);
+        this.setAttackDamage(50);
         return this;
     }
 
@@ -88,5 +89,15 @@ public class PlaneBulletDestroyedEffect extends ElementObj {
 
         // 如果numericPart为空,返回0(或其他默认值)
         return 0;
+    }
+
+    @Override
+    public Rectangle getRectangle() {
+        return new Rectangle((this.getX() - getMap().newX) * 2, this.getY(), 150, 150);
+    }
+
+    @Override
+    public void die(long gameTime) {
+        setAttackDamage(0);
     }
 }
