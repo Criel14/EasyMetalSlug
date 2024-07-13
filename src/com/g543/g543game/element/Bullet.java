@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
 
-public class EnemyBullet extends ElementObj {
+public class Bullet extends ElementObj {
 
     // 移动速度
     private int moveSpeed = 6;

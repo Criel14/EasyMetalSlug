@@ -175,7 +175,7 @@ public class Enemy extends ElementObj {
 
     private void shoot() {
         // 发射子弹逻辑
-        ElementObj obj = GameLoader.getObject("enemyBullet");
+        ElementObj obj = GameLoader.getObject("bullet");
         // 子弹类型
         String bulletType = "gunBullet";
         // 子弹伤害

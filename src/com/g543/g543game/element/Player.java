@@ -269,7 +269,7 @@ public class Player extends ElementObj {
     }
 
     private void addBullet() {
-        ElementObj obj = GameLoader.getObject("enemyBullet");
+        ElementObj obj = GameLoader.getObject("bullet");
         int x = this.getX();
         int y = this.getY();
         int isMovingRight = 0;
