@@ -279,7 +279,9 @@ public class Player extends ElementObj {
 
         // 伤害
         int bulletDanage = 30;
-        String data = x + "," + y + "," + bulletType + "," + isMovingRight + "," + bulletDanage;
+        String data;
+        if( bulletType.equals("gunBullet")) data = x + "," + y + "," + bulletType + "," + isMovingRight + "," + bulletDanage;
+        else data = x + "," + y + "," + bulletType + "_" + direction + "," + isMovingRight + "," + bulletDanage;
 
         obj.createElement(data);
         ElementManager.getManager().addElement(GameElement.PLAYER_BULLET, obj);
