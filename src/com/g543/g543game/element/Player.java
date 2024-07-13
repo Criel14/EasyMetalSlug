@@ -3,7 +3,6 @@ package com.g543.g543game.element;
 import com.g543.g543game.manager.ElementManager;
 import com.g543.g543game.manager.GameElement;
 import com.g543.g543game.manager.GameLoader;
-import com.g543.g543game.manager.SoundManager;
 import com.g543.g543game.util.KeyboardCode;
 
 import javax.imageio.ImageIO;
@@ -58,11 +57,8 @@ public class Player extends ElementObj {
     private int summonFrameCounter = 0;
 
 
-    // 子弹类型(gunBullet, RPGBullet_left, RPGBullet_right)
+    //子弹类型(gunBullet, RPGBullet_left, RPGBullet_right)
     private String bulletType = "gunBullet";
-
-    // 音频管理器
-    private SoundManager soundManager = SoundManager.getInstance();
 
     // 构造方法
     public Player() {
@@ -86,12 +82,6 @@ public class Player extends ElementObj {
         setMaxHp(500);
         initialY = this.getY(); // 初始化初始Y坐标
         return this;
-    }
-
-    @Override
-    public void die(long gameTime) {
-        System.out.println("玩家死了");
-        soundManager.playSound("player_die");
     }
 
     // 重写显示方法
@@ -217,12 +207,6 @@ public class Player extends ElementObj {
                         timer.setRepeats(false); // 只执行一次
                         timer.start();
                         addBullet(); // 发射子弹
-                        // 播放音频
-                        if (bulletType.equals("gunBullet")) {
-                            soundManager.playSound("gun_shoot");
-                        } else {
-                            soundManager.playSound("rpg_shoot");
-                        }
                     }
                     break;
                 case KeyboardCode.K:
@@ -232,7 +216,7 @@ public class Player extends ElementObj {
                     }
                     break;
                 case KeyboardCode.L:
-                    if (bulletType.equals("gunBullet")) switchWeapon("RPGBullet");
+                    if (bulletType.equals("gunBullet")) switchWeapon("RPG");
                     else switchWeapon("gun");
                 default:
                     break;
@@ -293,15 +277,9 @@ public class Player extends ElementObj {
         if (isMovingRight == 1) x += 50;
         y += 15;
 
-        // 子弹图片资源
-        String bulletSrc = this.bulletType;
         // 伤害
         int bulletDanage = 30;
-        // 映射RPG类型的字符串
-        if (bulletSrc.equals("RPGBullet")) {
-            bulletSrc += "_" + this.direction;
-        }
-        String data = x + "," + y + "," + bulletSrc + "," + isMovingRight + "," + bulletDanage;
+        String data = x + "," + y + "," + bulletType + "," + isMovingRight + "," + bulletDanage;
 
         obj.createElement(data);
         ElementManager.getManager().addElement(GameElement.PLAYER_BULLET, obj);
