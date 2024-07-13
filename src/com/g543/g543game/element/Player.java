@@ -269,7 +269,9 @@ public class Player extends ElementObj {
     }
 
     private void addBullet() {
-        ElementObj obj = GameLoader.getObject("bullet");
+        ElementObj obj;
+        String data;
+        int bulletDanage;
         int x = this.getX();
         int y = this.getY();
         int isMovingRight = 0;
@@ -277,9 +279,16 @@ public class Player extends ElementObj {
         if (isMovingRight == 1) x += 50;
         y += 15;
 
-        // 伤害
-        int bulletDanage = 30;
-        String data = x + "," + y + "," + bulletType + "," + isMovingRight + "," + bulletDanage;
+        if( bulletType.equals("gunBullet")) {
+            obj = GameLoader.getObject("gunBullet");
+            bulletDanage = 30;
+            data = x + "," + y + "," + bulletType + "," + isMovingRight + "," + bulletDanage;
+        }
+        else{
+            obj = GameLoader.getObject("RPGBullet");
+            bulletDanage = 50;
+            data = x + "," + y + "," + bulletType + "," + isMovingRight ;
+        }
 
         obj.createElement(data);
         ElementManager.getManager().addElement(GameElement.PLAYER_BULLET, obj);

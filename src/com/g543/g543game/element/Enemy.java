@@ -192,14 +192,14 @@ public class Enemy extends ElementObj {
 
     private void shoot() {
         // 发射子弹逻辑
-        ElementObj obj = GameLoader.getObject("bullet");
+        ElementObj obj = GameLoader.getObject("gunBullet");
         // 子弹类型
         String bulletType = "gunBullet";
         // 子弹伤害
         int bulletDamage = 30;
         // 判断类型
         if ("enemyRPG".equals(this.enemyType)) {
-            bulletType = "RPGBullet_" + this.direction;
+            bulletType = "RPGBullet";
             bulletDamage = 60;
         }
 
@@ -210,6 +210,9 @@ public class Enemy extends ElementObj {
         if (isMovingRight == 1) x += 50;
         y += 15;
         String data = x + "," + y + "," + bulletType + "," + isMovingRight + "," + bulletDamage;
+        if(bulletType.equals("RPGBullet")) {
+            obj = GameLoader.getObject(bulletType);
+        }
         obj.createElement(data);
         ElementManager.getManager().addElement(GameElement.ENEMY_BULLET, obj);
     }
