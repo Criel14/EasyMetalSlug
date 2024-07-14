@@ -31,7 +31,7 @@ public class GameEnd extends JFrame {
         this.add(bgPanel);
 
         // 创建开始游戏按钮
-        JButton startButton = new JButton("RESTART GAME");
+        JButton startButton = new JButton("BACK TO MENU");
         startButton.setFont(new Font("Arial", Font.BOLD, 32));
         // 设置按钮位置和大小
         startButton.setBounds(230, 650, 310, 48); // 中心位置
