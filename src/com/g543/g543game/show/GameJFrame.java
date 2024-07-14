@@ -93,9 +93,14 @@ public class GameJFrame extends JFrame {
             new Thread((Runnable) this.jPanel).start();
         }
 
+
         // 界面显示
         this.setVisible(true);
 
+    }
+
+    public void removeJFrame(){
+        dispose();
     }
 
 }

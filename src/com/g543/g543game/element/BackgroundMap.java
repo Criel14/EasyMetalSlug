@@ -21,7 +21,6 @@ public class BackgroundMap extends ElementObj{
         this.setX(Integer.parseInt(strs[0]));
         this.setY(Integer.parseInt(strs[1]));
         this.setImageIcon(GameLoader.imageMap.get(strs[2]));
-        System.out.println("加载的背景图是：" + GameLoader.imageMap.get(strs[2]));
         this.setHeight(GameJFrame.GAME_HEIGHT);
         this.setWidth(this.getImageIcon().getIconWidth());
         return this;

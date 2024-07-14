@@ -5,6 +5,7 @@ import com.g543.g543game.manager.ElementManager;
 import com.g543.g543game.manager.GameElement;
 import com.g543.g543game.manager.GameLoader;
 import com.g543.g543game.manager.SoundManager;
+import com.g543.g543game.show.GameStartFrame;
 
 import java.util.*;
 
@@ -14,6 +15,7 @@ public class GameThread extends Thread {
 
     private SoundManager soundManager = SoundManager.getInstance();
 
+    public static Boolean gameOver = false;
     // 关卡
     private int gameLevel = 1;
 
@@ -28,13 +30,13 @@ public class GameThread extends Thread {
     @Override
     public void run() {
         while (true) { // true可以换成变量来控制
+//            gameOver = false;
             // 加载
             gameLoad(gameLevel);
             // 进行
             gameRun();
             // 结束当前场景，释放资源
             gameEnd();
-
             try {
                 Thread.sleep(16);
             } catch (InterruptedException e) {
@@ -74,6 +76,11 @@ public class GameThread extends Thread {
             elementCollision(all);
             // 控制时间流逝
             gameTime++;
+            List<ElementObj> players = all.get(GameElement.PLAYER);
+            List<ElementObj> enemys = all.get(GameElement.ENEMY);
+            if(players.size()==0||enemys.size()==0){
+                return;
+            }
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
@@ -85,7 +92,9 @@ public class GameThread extends Thread {
 
     // 结束场景、资源回收
     private void gameEnd() {
-
+        ElementManager.removeAll();
+        gameOver = true;
+        new GameStartFrame();
     }
 
     // 对map中的元素执行executeModel
@@ -190,7 +199,6 @@ public class GameThread extends Thread {
         checkCollision(playerDestroyedEffect, hostage);
         checkBoomCollision(playerDestroyedEffect, enemy);
         checkCollision(enemyDestroyedEffect, player);
-
     }
 
 }

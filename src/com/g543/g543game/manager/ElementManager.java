@@ -57,4 +57,10 @@ public class ElementManager {
         return EM;
     }
 
+    public static void removeAll(){
+        for( GameElement ge : GameElement.values()){
+            EM.getGameElements().get(ge).clear();
+        }
+    }
+
 }

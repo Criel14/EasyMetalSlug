@@ -322,4 +322,11 @@ public class Player extends ElementObj {
         g.drawRect(20, 20, 300, 15);
         g.fillRect(20, 20, (int) (300 * this.getHp() / this.getMaxHp()), 15);
     }
+
+    @Override
+    public void die(long gameTime) {
+        if( this.getHp() <= 0) {
+            this.setAlive(false);
+        }
+    }
 }
