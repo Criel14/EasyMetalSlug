@@ -5,9 +5,8 @@ import com.g543.g543game.manager.ElementManager;
 import com.g543.g543game.manager.GameElement;
 import com.g543.g543game.manager.GameLoader;
 import com.g543.g543game.manager.SoundManager;
-import com.g543.g543game.show.GameEnd;
+import com.g543.g543game.show.GameEndJFrame;
 import com.g543.g543game.show.GameJFrame;
-import com.g543.g543game.show.GameStartFrame;
 
 import java.util.*;
 
@@ -109,9 +108,9 @@ public class GameThread extends Thread {
 
         if(players.size()!=0 && enemys .size()==0) {
             System.out.println("success");
-            new GameEnd("success");
+            new GameEndJFrame("success");
         }
-        else if(players.size() == 0) new GameEnd("fail");
+        else if(players.size() == 0) new GameEndJFrame("fail");
         ElementManager.removeAll();
     }
 
