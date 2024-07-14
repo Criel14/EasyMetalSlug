@@ -5,8 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GameEnd extends JFrame {
-    public GameEnd(String str) {
+public class GameEndJFrame extends JFrame {
+    public GameEndJFrame(String str) {
         init(str);
     }
 
