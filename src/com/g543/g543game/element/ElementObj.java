@@ -230,15 +230,17 @@ public abstract class ElementObj {
 
     public void showBloodBar(Graphics g) { //显示血条
         // 如果为子弹，就不显示
+        g.setColor(java.awt.Color.RED);
         if (this instanceof Bullet) {
             return;
+        }
+        else if(this instanceof Hostage){
+            g.setColor(Color.cyan);
         }
         // 如果血量小于0，就不显示
         if (this.getHp() <= 0) {
             return;
         } else {
-            // 设置颜色为红色
-            g.setColor(java.awt.Color.RED);
             g.drawRect((this.getX() - getMap().newX) * 2, this.getY() - 10, 100, 5);
             g.fillRect((this.getX() - getMap().newX) * 2, this.getY() - 10, (int) (100 * this.getHp() / maxHp), 5);
         }
