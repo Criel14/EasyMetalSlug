@@ -81,5 +81,16 @@ public class Hostage extends ElementObj{
         isDying = true;
     }
 
-
+    @Override
+    public void showBloodBar(Graphics g) { //显示血条
+        // 如果血量小于0，就不显示
+        if (this.getHp() <= 0) {
+            return;
+        } else {
+            // 设置颜色为红色
+            g.setColor(Color.GREEN);
+            g.drawRect((this.getX() - getMap().newX) * 2, this.getY() - 10, 100, 5);
+            g.fillRect((this.getX() - getMap().newX) * 2, this.getY() - 10, (int) (100 * this.getHp() / this.getMaxHp()), 5);
+        }
+    }
 }

@@ -17,7 +17,7 @@ public class GameEndJFrame extends JFrame {
         // 设置窗口关闭时自动关闭
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // 设置窗口标题
-        this.setTitle("G543Game - Start Page");
+        this.setTitle("G543Game - End Page");
         // 设置窗口居中
         this.setLocationRelativeTo(null);
         // 设置布局为null，方便自定义布局
