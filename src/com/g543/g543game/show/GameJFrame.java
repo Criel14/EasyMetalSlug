@@ -100,7 +100,7 @@ public class GameJFrame extends JFrame {
     }
 
     public void removeJFrame(){
-        dispose();
+        this.dispose();
     }
 
 }

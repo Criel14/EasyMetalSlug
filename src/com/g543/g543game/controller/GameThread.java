@@ -5,6 +5,8 @@ import com.g543.g543game.manager.ElementManager;
 import com.g543.g543game.manager.GameElement;
 import com.g543.g543game.manager.GameLoader;
 import com.g543.g543game.manager.SoundManager;
+import com.g543.g543game.show.GameEnd;
+import com.g543.g543game.show.GameJFrame;
 import com.g543.g543game.show.GameStartFrame;
 
 import java.util.*;
@@ -37,6 +39,9 @@ public class GameThread extends Thread {
             gameRun();
             // 结束当前场景，释放资源
             gameEnd();
+            if(gameOver == true){
+                break;
+            }
             try {
                 Thread.sleep(16);
             } catch (InterruptedException e) {
@@ -78,7 +83,7 @@ public class GameThread extends Thread {
             gameTime++;
             List<ElementObj> players = all.get(GameElement.PLAYER);
             List<ElementObj> enemys = all.get(GameElement.ENEMY);
-            if(players.size()==0||enemys.size()==0){
+            if(players.size()==0 || enemys.size()==0){
                 return;
             }
             try {
@@ -92,9 +97,22 @@ public class GameThread extends Thread {
 
     // 结束场景、资源回收
     private void gameEnd() {
-        ElementManager.removeAll();
+        Map<GameElement, List<ElementObj>> all = new HashMap<>(elementManager.getGameElements());
+
         gameOver = true;
-        new GameStartFrame();
+        soundManager.pauseAllSounds();
+        GameJFrame gameJFrame = GameJFrame.getInstance();
+        gameJFrame.removeJFrame();
+
+        List<ElementObj> players = all.get(GameElement.PLAYER);
+        List<ElementObj> enemys = all.get(GameElement.ENEMY);
+
+        if(players.size()!=0 && enemys .size()==0) {
+            System.out.println("success");
+            new GameEnd("success");
+        }
+        else if(players.size() == 0) new GameEnd("fail");
+        ElementManager.removeAll();
     }
 
     // 对map中的元素执行executeModel

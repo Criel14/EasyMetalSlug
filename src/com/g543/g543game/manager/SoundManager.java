@@ -82,6 +82,31 @@ public class SoundManager {
             System.err.println("Sound not found: " + soundName);
         }
     }
+
+    // 暂停音频
+    public void pauseSound(String soundName) {
+        Clip clip = soundMap.get(soundName);
+        if (clip != null) {
+            if (clip.isRunning()) {
+                clip.stop(); // 暂停音频播放
+            } else {
+                System.err.println("Sound is not playing: " + soundName);
+            }
+        } else {
+            System.err.println("Sound not found: " + soundName);
+        }
+    }
+
+    // 暂停所有音频
+    public void pauseAllSounds() {
+        for (Map.Entry<String, Clip> entry : soundMap.entrySet()) {
+            Clip clip = entry.getValue();
+            if (clip.isRunning()) {
+                clip.stop();
+            }
+        }
+    }
+
 }
 
 
